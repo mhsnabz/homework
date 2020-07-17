@@ -13,7 +13,7 @@ class HomeVC: UIViewController {
     var delegate : HomeControllerDelegate?
     var isMenuOpen : Bool = false
     var menu = AnimationView()
-    
+    var vc : ContainerController?
     override func viewDidLoad() {
         super.viewDidLoad()
    
@@ -44,8 +44,8 @@ class HomeVC: UIViewController {
         navigationItem.setLeftBarButton(leftBarItem, animated: true)
     }
     @objc func menuClick(){
-        self.delegate?.handleMenuToggle()
-        if isMenuOpen {
+        self.delegate?.handleMenuToggle(forMenuOption: nil)
+        if vc?.isExanded ?? false {
             menu.play(fromProgress: 90, toProgress: 0, loopMode: .none) { (a) in
                 self.isMenuOpen = false
             }
