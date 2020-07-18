@@ -22,7 +22,7 @@ class ContainerController: UIViewController {
     }
         
     override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .lightContent
+        return .darkContent
     }
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation{
         return .slide

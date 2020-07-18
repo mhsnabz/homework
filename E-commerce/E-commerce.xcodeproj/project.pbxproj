@@ -31,6 +31,8 @@
 		66EEAC7424C2CB3600883EC6 /* WomanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC7324C2CB3600883EC6 /* WomanVC.swift */; };
 		66EEAC7624C2CB4300883EC6 /* KidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC7524C2CB4300883EC6 /* KidVC.swift */; };
 		66EEAC7824C2CB5000883EC6 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC7724C2CB5000883EC6 /* ProfileVC.swift */; };
+		66EEAC7E24C2DFE800883EC6 /* HomeVcCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC7D24C2DFE800883EC6 /* HomeVcCell.swift */; };
+		66EEAC8024C2E19000883EC6 /* CollectionViewOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC7F24C2E18F00883EC6 /* CollectionViewOption.swift */; };
 		901C6763C4F41308BFEA10F9 /* Pods_E_commerceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5691939F2B28618B9EA85465 /* Pods_E_commerceTests.framework */; };
 		C9AD2B498EF01B29DC2B4AFB /* Pods_E_commerce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D341F2BF2F9471F4F3C68E /* Pods_E_commerce.framework */; };
 		D786D16DDFD6F8D81D2BB735 /* Pods_E_commerce_E_commerceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C36CDB583A17952B04A260D /* Pods_E_commerce_E_commerceUITests.framework */; };
@@ -89,6 +91,8 @@
 		66EEAC7324C2CB3600883EC6 /* WomanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WomanVC.swift; sourceTree = "<group>"; };
 		66EEAC7524C2CB4300883EC6 /* KidVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidVC.swift; sourceTree = "<group>"; };
 		66EEAC7724C2CB5000883EC6 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		66EEAC7D24C2DFE800883EC6 /* HomeVcCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVcCell.swift; sourceTree = "<group>"; };
+		66EEAC7F24C2E18F00883EC6 /* CollectionViewOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewOption.swift; sourceTree = "<group>"; };
 		8471B01016185522757CD9CF /* Pods-E-commerce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-commerce.release.xcconfig"; path = "Target Support Files/Pods-E-commerce/Pods-E-commerce.release.xcconfig"; sourceTree = "<group>"; };
 		8C1B881298E2848FC7B0FC9B /* Pods-E-commerceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-commerceTests.release.xcconfig"; path = "Target Support Files/Pods-E-commerceTests/Pods-E-commerceTests.release.xcconfig"; sourceTree = "<group>"; };
 		98FD7BBF6DE6FF4F922151E4 /* Pods-E-commerceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-commerceTests.debug.xcconfig"; path = "Target Support Files/Pods-E-commerceTests/Pods-E-commerceTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 				66EEAC5224C21BF400883EC6 /* Utilities.swift */,
 				66EEAC6224C2326600883EC6 /* Protocol.swift */,
 				66EEAC6624C2441300883EC6 /* MenuOption.swift */,
+				66EEAC7F24C2E18F00883EC6 /* CollectionViewOption.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				66EEAC6424C23F4700883EC6 /* MenuOptionCell.swift */,
+				66EEAC7D24C2DFE800883EC6 /* HomeVcCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -549,9 +555,11 @@
 				66EEAC5624C21D1E00883EC6 /* SplashScreen.swift in Sources */,
 				66EEAC6724C2441300883EC6 /* MenuOption.swift in Sources */,
 				66EEAC6524C23F4700883EC6 /* MenuOptionCell.swift in Sources */,
+				66EEAC8024C2E19000883EC6 /* CollectionViewOption.swift in Sources */,
 				66EEAC6124C231BE00883EC6 /* MenuController.swift in Sources */,
 				66EEAC7824C2CB5000883EC6 /* ProfileVC.swift in Sources */,
 				66EEAC5924C224AA00883EC6 /* HomeVC.swift in Sources */,
+				66EEAC7E24C2DFE800883EC6 /* HomeVcCell.swift in Sources */,
 				66EEAC7424C2CB3600883EC6 /* WomanVC.swift in Sources */,
 				66EEAC2124C218ED00883EC6 /* ViewController.swift in Sources */,
 				66EEAC5C24C22B4400883EC6 /* ContainerController.swift in Sources */,

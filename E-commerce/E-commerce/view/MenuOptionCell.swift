@@ -33,6 +33,7 @@ class MenuOptionCell: UITableViewCell {
         addSubview(name)
         name.anchor(top: nil, left: typeImage.rightAnchor, bottom: nil, rigth: nil, marginTop: 0, marginLeft: 10, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
         name.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        selectionStyle = .none
             
     }
     
