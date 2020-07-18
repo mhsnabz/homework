@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		661997A924C32BE600298432 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661997A824C32BE600298432 /* Register.swift */; };
+		661997AF24C3344C00298432 /* wait.json in Resources */ = {isa = PBXBuildFile; fileRef = 661997AE24C3344C00298432 /* wait.json */; };
 		66EEAC1D24C218ED00883EC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC1C24C218ED00883EC6 /* AppDelegate.swift */; };
 		66EEAC1F24C218ED00883EC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC1E24C218ED00883EC6 /* SceneDelegate.swift */; };
 		66EEAC2124C218ED00883EC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC2024C218ED00883EC6 /* ViewController.swift */; };
@@ -65,6 +66,7 @@
 		4C36CDB583A17952B04A260D /* Pods_E_commerce_E_commerceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_commerce_E_commerceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5691939F2B28618B9EA85465 /* Pods_E_commerceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_commerceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		661997A824C32BE600298432 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		661997AE24C3344C00298432 /* wait.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wait.json; sourceTree = "<group>"; };
 		66EEAC1924C218ED00883EC6 /* E-commerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-commerce.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66EEAC1C24C218ED00883EC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66EEAC1E24C218ED00883EC6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 		66EEAC5D24C22D2700883EC6 /* anim */ = {
 			isa = PBXGroup;
 			children = (
+				661997AE24C3344C00298432 /* wait.json */,
 				66EEAC6F24C2C74100883EC6 /* car.json */,
 				66EEAC5E24C22D3100883EC6 /* menu.json */,
 			);
@@ -434,6 +437,7 @@
 				66EEAC4D24C2197400883EC6 /* GoogleService-Info.plist in Resources */,
 				66EEAC2424C218ED00883EC6 /* Main.storyboard in Resources */,
 				66EEAC5F24C22D3100883EC6 /* menu.json in Resources */,
+				661997AF24C3344C00298432 /* wait.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

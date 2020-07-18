@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import JDropDownAlert
 import SVProgressHUD
-
+import Lottie
 class Register: UIViewController {
     
       let labelContrackt : UILabel = {
@@ -58,7 +58,7 @@ class Register: UIViewController {
 
         let name : TweeAttributedTextField = {
                   let txt = TweeAttributedTextField()
-                   txt.placeholder = "Name"
+                   txt.placeholder = "Adınızı ve Soyadınız"
                   txt.font = UIFont(name: Utilities.fontBold, size: 14)!
                    txt.activeLineColor =   UIColor.mainColor()
                    txt.lineColor = .darkGray
@@ -115,26 +115,37 @@ class Register: UIViewController {
              }()
     let login : UIButton = {
              let btn = UIButton(type: .system)
-             let text1 = NSMutableAttributedString(string: "You Have Already An Account! ", attributes :[NSAttributedString.Key.font : UIFont(name: Utilities.font, size: 14)!
+             let text1 = NSMutableAttributedString(string: "Zaten Bir Hesabınız Var Mı? ", attributes :[NSAttributedString.Key.font : UIFont(name: Utilities.font, size: 14)!
                  , NSAttributedString.Key.foregroundColor: UIColor.lightGray ])
-            text1.append(NSAttributedString(string: "Login", attributes :[NSAttributedString.Key.font : UIFont(name:Utilities.font, size: 14)!
+            text1.append(NSAttributedString(string: "Giriş Yapın!", attributes :[NSAttributedString.Key.font : UIFont(name:Utilities.font, size: 14)!
                 , NSAttributedString.Key.foregroundColor:UIColor.mainColor() ]))
                  btn.setAttributedTitle(text1, for: .normal)
              btn.addTarget(self, action: #selector(loginPage), for: .touchUpInside)
              return btn
          }()
+    var wait = AnimationView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
           hideKeyboardWhenTappedAround()
-          let stack = UIStackView(arrangedSubviews: [name,email,password,btnLogin])
+          let stack = UIStackView(arrangedSubviews: [name,email,password])
           stack.distribution = .fillEqually
           stack.spacing = 16
           stack.axis = .vertical
           view.addSubview(stack)
-          stack.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 40, marginLeft: 40, marginBottom: 0, marginRigth: 40, width: 0, heigth: 236)
-          btnLogin.layer.cornerRadius = 50 / 2
+        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 40, marginLeft: 60, marginBottom: 0, marginRigth: 40, width: 0, heigth: 170)
+        wait = .init(name: "wait")
+        wait.animationSpeed = 1
+        wait.loopMode = .loop
+        wait.play()
+        wait.isHidden = true
+        view.addSubview(wait)
+            wait.anchor(top: stack.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 16, marginLeft: 40, marginBottom: 0, marginRigth: 40, width: 0, heigth: 50)
+        view.addSubview(btnLogin)
+        btnLogin.anchor(top: stack.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 16, marginLeft: 40, marginBottom: 0, marginRigth: 40, width: 0, heigth: 50)
         
+          btnLogin.layer.cornerRadius = 50 / 2
+ 
           view.addSubview(login)
           login.anchor(top: nil, left: nil, bottom: view.bottomAnchor, rigth: nil, marginTop: 0, marginLeft: 0, marginBottom: 30, marginRigth: 0, width: 0, heigth: 40)
           login.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -218,71 +229,37 @@ class Register: UIViewController {
  
  
  @objc func signUp(){
+ self.wait.isHidden = false
+            self.btnLogin.isHidden = true
+            self.wait.play()
  
-     let db = Firestore.firestore().collection("username")
-           db.getDocuments { (querySnap, err) in
-               if err == nil {
-                   if !querySnap!.isEmpty{
-                       for doc in querySnap!.documents {
-                           if doc.documentID == self.email.text{
-                               self.btnLogin.isEnabled = false
-                               self.btnLogin.backgroundColor = UIColor.mainColor()
-                           }
-                           else
-                           {
-                               Auth.auth().createUser(withEmail: self.email.text!, password: self.password.text!) { (result, err) in
-                                 if err == nil {
-//                                     let dic = ["email":self.email.text!,"name":self.name.text!,"username":"@"+self.userName.text!,"profileImage":"","uid":Auth.auth().currentUser!.uid,"github":"","insta":"","job":"","snap":"","twitter":"","age":self.ageCalgulate(),"skils":"#none"] as [String:Any]
-//                                     let db = Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid)
-//                                     db.setData(dic) { (err) in
-//                                         if err == nil {
-//                                             let db = Firestore.firestore().collection("username").document(self.userName.text!)
-//                                             db.setData(["username":self.userName.text!,"uid":Auth.auth().currentUser!.uid]) { (err) in
-//                                                 if err == nil {
-//                                                     let vc = MainVC()
-//                                                     vc.modalPresentationStyle = .fullScreen
-//                                                     self.present(vc, animated: true, completion: nil)
-//                                                 }
-//                                             }
-//
-//                                         }
-//                                     }
-                                 }else{
-                                     if err?.localizedDescription == "The email address is already in use by another account."{
-                                         self.email.infoLabel.text = "The email address is already in use by another account." }
-                                     return
-                                                                     
-                                                       }
-                                                    }
-                           }
-                       }
-                   }else{
-                     Auth.auth().createUser(withEmail: self.email.text!, password: self.password.text!) { (result, err) in
-                      if err == nil {
-//                          let dic = ["email":self.email.text!,"name":self.name.text!,"username":"@"+self.userName.text!,"profileImage":"","uid":Auth.auth().currentUser!.uid] as [String:Any]
-//                          let db = Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid)
-//                          db.setData(dic) { (err) in
-//                              if err == nil {
-//                                    let db = Firestore.firestore().collection("username").document(self.userName.text!)
-//                                 db.setData(["username":self.userName.text!,"uid":Auth.auth().currentUser!.uid]) { (err) in
-//                                     if err == nil {
-//                                         let vc = MainVC()
-//                                         vc.modalPresentationStyle = .fullScreen
-//                                         self.present(vc, animated: true, completion: nil)
-//                                                                                   }
-//                                                                               }
-//                              }
-//                          }
-                      }else{
-                         if err?.localizedDescription == "The email address is already in use by another account."{
-                          self.email.infoLabel.text = "The email address is already in use by another account." }
-                          return
-                                    
-                      }
-                   }
-               }
-           }
-     
-     }
- }
+    Auth.auth().createUser(withEmail: self.email.text!, password: self.password.text!) { (result, err) in
+        if err == nil
+        {
+           
+            let dic = ["name":self.name.text!,"email":self.email.text!,"uid":result!.user.uid ] as [String:Any]
+            let db = Firestore.firestore().collection("user")
+                .document(result!.user.uid)
+            
+            db.setData(dic) { (err) in
+                if err == nil
+                {
+                let vc = ContainerController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }
+            
+        }else{
+            if err?.localizedDescription == "The email address is already in use by another account."{
+                self.email.infoLabel.text = "Bu E-posta Adresi Zaten Kayıtlı" }
+            self.wait.isHidden = true
+            self.btnLogin.isHidden = false
+            return
+        }
+    }
+    
+
+    }
+    
 }
