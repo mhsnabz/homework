@@ -124,7 +124,7 @@ let progres = SVProgressHUD.self
                 btn.setTitle("Kaydol", for: .normal)
                 btn.setTitleColor(.black, for: .normal)
             btn.titleLabel?.font = UIFont(name: Utilities.fontBold, size: 16)!
-//               btn.addTarget(self, action: #selector(SignUpPage), for: .touchUpInside)
+               btn.addTarget(self, action: #selector(SignUpPage), for: .touchUpInside)
 
                       return btn
             }()
@@ -180,7 +180,13 @@ let progres = SVProgressHUD.self
            btnLogin.backgroundColor = UIColor.mainColor()
            
        }
-    
+    @objc func SignUpPage (){
+        let nextVC = Register()
+           nextVC.modalPresentationStyle =  .fullScreen
+            self.present(nextVC, animated: true, completion: nil)
+            
+      }
+
     @objc func loginPage(){
         
 //         self.progres.setBackgroundColor(.mainColor())
@@ -242,5 +248,5 @@ let progres = SVProgressHUD.self
         
     
     }
-
+  
 }

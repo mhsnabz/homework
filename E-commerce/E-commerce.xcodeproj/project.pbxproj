@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		661997A924C32BE600298432 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661997A824C32BE600298432 /* Register.swift */; };
 		66EEAC1D24C218ED00883EC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC1C24C218ED00883EC6 /* AppDelegate.swift */; };
 		66EEAC1F24C218ED00883EC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC1E24C218ED00883EC6 /* SceneDelegate.swift */; };
 		66EEAC2124C218ED00883EC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC2024C218ED00883EC6 /* ViewController.swift */; };
@@ -63,6 +64,7 @@
 		39D341F2BF2F9471F4F3C68E /* Pods_E_commerce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_commerce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C36CDB583A17952B04A260D /* Pods_E_commerce_E_commerceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_commerce_E_commerceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5691939F2B28618B9EA85465 /* Pods_E_commerceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_commerceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		661997A824C32BE600298432 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		66EEAC1924C218ED00883EC6 /* E-commerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-commerce.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66EEAC1C24C218ED00883EC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66EEAC1E24C218ED00883EC6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,7 +177,6 @@
 				66EEAC5724C2249500883EC6 /* Home */,
 				66EEAC5424C21D0900883EC6 /* SplashScreen */,
 				66EEAC5124C21BD600883EC6 /* Helper */,
-				66EEAC4E24C21B1500883EC6 /* Login */,
 				66EEAC1C24C218ED00883EC6 /* AppDelegate.swift */,
 				66EEAC1E24C218ED00883EC6 /* SceneDelegate.swift */,
 				66EEAC2024C218ED00883EC6 /* ViewController.swift */,
@@ -210,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				66EEAC4F24C21B2B00883EC6 /* Login.swift */,
+				661997A824C32BE600298432 /* Register.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -245,6 +247,7 @@
 		66EEAC5A24C22B3100883EC6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				66EEAC4E24C21B1500883EC6 /* Login */,
 				66EEAC7C24C2CB6700883EC6 /* KID */,
 				66EEAC7B24C2CB5F00883EC6 /* PROFILE */,
 				66EEAC7A24C2CB5A00883EC6 /* WOMAN */,
@@ -576,6 +579,7 @@
 				66EEAC1F24C218ED00883EC6 /* SceneDelegate.swift in Sources */,
 				66EEAC7624C2CB4300883EC6 /* KidVC.swift in Sources */,
 				66EEAC5324C21BF400883EC6 /* Utilities.swift in Sources */,
+				661997A924C32BE600298432 /* Register.swift in Sources */,
 				66EEAC5024C21B2B00883EC6 /* Login.swift in Sources */,
 				66EEAC6324C2326600883EC6 /* Protocol.swift in Sources */,
 			);

@@ -17,7 +17,7 @@ class SplashScreen: UIViewController {
                 view.addSubview(splahScreen)
                splahScreen.animationType = .twitter
         splahScreen.startAnimation() {
-            let vc = ContainerController()
+            let vc = Login()
             
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
