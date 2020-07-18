@@ -15,6 +15,7 @@ class HomeVcCell: UICollectionViewCell
        let img = UIImageView()
         img.clipsToBounds = true
         img.layer.cornerRadius = 8
+        
         return img
     }()
     override init(frame: CGRect) {
