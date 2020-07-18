@@ -64,7 +64,7 @@ class ContainerController: UIViewController {
                    }
          
         }
-          animateStatusBar()
+          
     }
     func animateStatusBar(){
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
@@ -74,11 +74,23 @@ class ContainerController: UIViewController {
     func didSelectMenuOption (menuOPtion : MenuOption){
         switch menuOPtion {
         case .man:
-            print("man")
+         let vc = ManVC()
+         vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
         case .woman:
-            print("woman")
+              let vc = WomanVC()
+                 vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: nil)
         case .kid:
-            print("kid")
+               let vc = KidVC()
+                 vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: nil)
+        case .profile:
+                let vc = ProfileVC()
+                 vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: nil)
+        case .logOut:
+            print("cikis")
         }
        
     }

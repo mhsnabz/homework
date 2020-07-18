@@ -20,7 +20,7 @@ class MenuOptionCell: UITableViewCell {
        let lbl = UILabel()
         lbl.font = UIFont(name: Utilities.font, size: 14)
         lbl.text = "sample text"
-        lbl.textColor = .white
+        lbl.textColor = .black
         return lbl
     }()
  

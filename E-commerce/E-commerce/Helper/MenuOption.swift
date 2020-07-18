@@ -10,6 +10,9 @@ enum MenuOption : Int ,CustomStringConvertible {
     case man
     case woman
     case kid
+    case profile
+    case logOut
+    
     var description: String{
         switch self {
         case .kid:
@@ -17,8 +20,11 @@ enum MenuOption : Int ,CustomStringConvertible {
         case .woman :
             return "Kadın"
         case.man:
-            
             return "Erkek"
+        case .profile:
+            return "Profile"
+        case .logOut:
+            return "Çıkış"
         
         }
     }
@@ -27,7 +33,8 @@ enum MenuOption : Int ,CustomStringConvertible {
         case .man : return UIImage(named: "male")!
         case .kid : return UIImage(named: "kid")!
         case.woman : return UIImage(named: "female")!
-     
+        case .logOut : return UIImage(named: "logOut")!
+        case .profile : return UIImage(named: "profile")!
         }
     }
 }

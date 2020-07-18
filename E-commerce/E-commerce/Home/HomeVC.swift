@@ -12,7 +12,7 @@ class HomeVC: UIViewController {
     
     var delegate : HomeControllerDelegate?
     var isMenuOpen : Bool = false
-    var menu = AnimationView()
+    var menu = UIButton()
     var vc : ContainerController?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +24,11 @@ class HomeVC: UIViewController {
 
     func configureNavController(){
 
-         menu.animation = Animation.named("menu")
-          menu.clipsToBounds = false
-        menu.translatesAutoresizingMaskIntoConstraints = false
-        menu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        menu.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(menuClick)))
-        menu.animationSpeed = 2
+      
+    
+         
+    
+        
 
 //        menu.setPlayRange(fromMarker: "touchDownStart", toMarker: "touchDownEnd", event: .touchDown)
 //        menu.setPlayRange(fromMarker: "touchDownEnd", toMarker: "touchUpCancel", event: .touchUpOutside)
@@ -39,21 +38,31 @@ class HomeVC: UIViewController {
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationItem.title = "E-Commarence Homework"
-        let leftBarItem = UIBarButtonItem(customView: menu)
-        
-        navigationItem.setLeftBarButton(leftBarItem, animated: true)
+ 
+        let menuBtn = UIButton(type: .custom)
+        menuBtn.frame = CGRect(x: 0.0, y: 0.0, width: 20, height: 20)
+                 menuBtn.setImage(UIImage(named:"menu"), for: .normal)
+                 menuBtn.addTarget(self, action: #selector(menuClick), for: .touchUpInside)
+            let menuBarItem = UIBarButtonItem(customView: menuBtn)
+            let currWidth = menuBarItem.customView?.widthAnchor.constraint(equalToConstant: 24)
+            currWidth?.isActive = true
+            let currHeight = menuBarItem.customView?.heightAnchor.constraint(equalToConstant: 24)
+            currHeight?.isActive = true
+            self.navigationItem.leftBarButtonItem = menuBarItem
+         
+     
     }
     @objc func menuClick(){
         self.delegate?.handleMenuToggle(forMenuOption: nil)
-        if vc?.isExanded ?? false {
-            menu.play(fromProgress: 90, toProgress: 0, loopMode: .none) { (a) in
-                self.isMenuOpen = false
-            }
-            
+        if !isMenuOpen {
+            self.isMenuOpen = false
+                         
+           
         }else{
-            menu.play(fromProgress: 0, toProgress: 90, loopMode: .none) { (a) in
+           
                 self.isMenuOpen = true
-            }
+          
+          
         }
         
     }

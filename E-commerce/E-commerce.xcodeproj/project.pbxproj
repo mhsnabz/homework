@@ -26,7 +26,11 @@
 		66EEAC6324C2326600883EC6 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC6224C2326600883EC6 /* Protocol.swift */; };
 		66EEAC6524C23F4700883EC6 /* MenuOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC6424C23F4700883EC6 /* MenuOptionCell.swift */; };
 		66EEAC6724C2441300883EC6 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC6624C2441300883EC6 /* MenuOption.swift */; };
-		66EEAC6D24C24A8400883EC6 /* car.json in Resources */ = {isa = PBXBuildFile; fileRef = 66EEAC6C24C24A8400883EC6 /* car.json */; };
+		66EEAC7024C2C74100883EC6 /* car.json in Resources */ = {isa = PBXBuildFile; fileRef = 66EEAC6F24C2C74100883EC6 /* car.json */; };
+		66EEAC7224C2CB2700883EC6 /* ManVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC7124C2CB2700883EC6 /* ManVC.swift */; };
+		66EEAC7424C2CB3600883EC6 /* WomanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC7324C2CB3600883EC6 /* WomanVC.swift */; };
+		66EEAC7624C2CB4300883EC6 /* KidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC7524C2CB4300883EC6 /* KidVC.swift */; };
+		66EEAC7824C2CB5000883EC6 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC7724C2CB5000883EC6 /* ProfileVC.swift */; };
 		901C6763C4F41308BFEA10F9 /* Pods_E_commerceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5691939F2B28618B9EA85465 /* Pods_E_commerceTests.framework */; };
 		C9AD2B498EF01B29DC2B4AFB /* Pods_E_commerce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D341F2BF2F9471F4F3C68E /* Pods_E_commerce.framework */; };
 		D786D16DDFD6F8D81D2BB735 /* Pods_E_commerce_E_commerceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C36CDB583A17952B04A260D /* Pods_E_commerce_E_commerceUITests.framework */; };
@@ -80,7 +84,11 @@
 		66EEAC6224C2326600883EC6 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		66EEAC6424C23F4700883EC6 /* MenuOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptionCell.swift; sourceTree = "<group>"; };
 		66EEAC6624C2441300883EC6 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
-		66EEAC6C24C24A8400883EC6 /* car.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = car.json; sourceTree = "<group>"; };
+		66EEAC6F24C2C74100883EC6 /* car.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = car.json; sourceTree = "<group>"; };
+		66EEAC7124C2CB2700883EC6 /* ManVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManVC.swift; sourceTree = "<group>"; };
+		66EEAC7324C2CB3600883EC6 /* WomanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WomanVC.swift; sourceTree = "<group>"; };
+		66EEAC7524C2CB4300883EC6 /* KidVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidVC.swift; sourceTree = "<group>"; };
+		66EEAC7724C2CB5000883EC6 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		8471B01016185522757CD9CF /* Pods-E-commerce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-commerce.release.xcconfig"; path = "Target Support Files/Pods-E-commerce/Pods-E-commerce.release.xcconfig"; sourceTree = "<group>"; };
 		8C1B881298E2848FC7B0FC9B /* Pods-E-commerceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-commerceTests.release.xcconfig"; path = "Target Support Files/Pods-E-commerceTests/Pods-E-commerceTests.release.xcconfig"; sourceTree = "<group>"; };
 		98FD7BBF6DE6FF4F922151E4 /* Pods-E-commerceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-commerceTests.debug.xcconfig"; path = "Target Support Files/Pods-E-commerceTests/Pods-E-commerceTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +161,7 @@
 		66EEAC1B24C218ED00883EC6 /* E-commerce */ = {
 			isa = PBXGroup;
 			children = (
+				66EEAC6E24C2C6D100883EC6 /* view */,
 				66EEAC5D24C22D2700883EC6 /* anim */,
 				66EEAC5A24C22B3100883EC6 /* Controller */,
 				66EEAC5724C2249500883EC6 /* Home */,
@@ -167,7 +176,6 @@
 				66EEAC2724C218EE00883EC6 /* LaunchScreen.storyboard */,
 				66EEAC2A24C218EE00883EC6 /* Info.plist */,
 				66EEAC4C24C2197400883EC6 /* GoogleService-Info.plist */,
-				66EEAC6424C23F4700883EC6 /* MenuOptionCell.swift */,
 			);
 			path = "E-commerce";
 			sourceTree = "<group>";
@@ -227,6 +235,10 @@
 		66EEAC5A24C22B3100883EC6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				66EEAC7C24C2CB6700883EC6 /* KID */,
+				66EEAC7B24C2CB5F00883EC6 /* PROFILE */,
+				66EEAC7A24C2CB5A00883EC6 /* WOMAN */,
+				66EEAC7924C2CB5400883EC6 /* MAN */,
 				66EEAC5B24C22B4400883EC6 /* ContainerController.swift */,
 				66EEAC6024C231BE00883EC6 /* MenuController.swift */,
 			);
@@ -236,10 +248,50 @@
 		66EEAC5D24C22D2700883EC6 /* anim */ = {
 			isa = PBXGroup;
 			children = (
-				66EEAC6C24C24A8400883EC6 /* car.json */,
+				66EEAC6F24C2C74100883EC6 /* car.json */,
 				66EEAC5E24C22D3100883EC6 /* menu.json */,
 			);
 			path = anim;
+			sourceTree = "<group>";
+		};
+		66EEAC6E24C2C6D100883EC6 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				66EEAC6424C23F4700883EC6 /* MenuOptionCell.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		66EEAC7924C2CB5400883EC6 /* MAN */ = {
+			isa = PBXGroup;
+			children = (
+				66EEAC7124C2CB2700883EC6 /* ManVC.swift */,
+			);
+			path = MAN;
+			sourceTree = "<group>";
+		};
+		66EEAC7A24C2CB5A00883EC6 /* WOMAN */ = {
+			isa = PBXGroup;
+			children = (
+				66EEAC7324C2CB3600883EC6 /* WomanVC.swift */,
+			);
+			path = WOMAN;
+			sourceTree = "<group>";
+		};
+		66EEAC7B24C2CB5F00883EC6 /* PROFILE */ = {
+			isa = PBXGroup;
+			children = (
+				66EEAC7724C2CB5000883EC6 /* ProfileVC.swift */,
+			);
+			path = PROFILE;
+			sourceTree = "<group>";
+		};
+		66EEAC7C24C2CB6700883EC6 /* KID */ = {
+			isa = PBXGroup;
+			children = (
+				66EEAC7524C2CB4300883EC6 /* KidVC.swift */,
+			);
+			path = KID;
 			sourceTree = "<group>";
 		};
 		EEF2A944F9116E5F78EE3E5D /* Frameworks */ = {
@@ -362,8 +414,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				66EEAC2924C218EE00883EC6 /* LaunchScreen.storyboard in Resources */,
+				66EEAC7024C2C74100883EC6 /* car.json in Resources */,
 				66EEAC2624C218EE00883EC6 /* Assets.xcassets in Resources */,
-				66EEAC6D24C24A8400883EC6 /* car.json in Resources */,
 				66EEAC4D24C2197400883EC6 /* GoogleService-Info.plist in Resources */,
 				66EEAC2424C218ED00883EC6 /* Main.storyboard in Resources */,
 				66EEAC5F24C22D3100883EC6 /* menu.json in Resources */,
@@ -498,11 +550,15 @@
 				66EEAC6724C2441300883EC6 /* MenuOption.swift in Sources */,
 				66EEAC6524C23F4700883EC6 /* MenuOptionCell.swift in Sources */,
 				66EEAC6124C231BE00883EC6 /* MenuController.swift in Sources */,
+				66EEAC7824C2CB5000883EC6 /* ProfileVC.swift in Sources */,
 				66EEAC5924C224AA00883EC6 /* HomeVC.swift in Sources */,
+				66EEAC7424C2CB3600883EC6 /* WomanVC.swift in Sources */,
 				66EEAC2124C218ED00883EC6 /* ViewController.swift in Sources */,
 				66EEAC5C24C22B4400883EC6 /* ContainerController.swift in Sources */,
+				66EEAC7224C2CB2700883EC6 /* ManVC.swift in Sources */,
 				66EEAC1D24C218ED00883EC6 /* AppDelegate.swift in Sources */,
 				66EEAC1F24C218ED00883EC6 /* SceneDelegate.swift in Sources */,
+				66EEAC7624C2CB4300883EC6 /* KidVC.swift in Sources */,
 				66EEAC5324C21BF400883EC6 /* Utilities.swift in Sources */,
 				66EEAC5024C21B2B00883EC6 /* Login.swift in Sources */,
 				66EEAC6324C2326600883EC6 /* Protocol.swift in Sources */,
