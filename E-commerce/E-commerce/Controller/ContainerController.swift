@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import FirebaseAuth
 class ContainerController: UIViewController {
 
     var menuController : MenuController!
@@ -93,7 +93,15 @@ class ContainerController: UIViewController {
                 vc.currentUser = currentUser
                 present(vc, animated: true, completion: nil)
         case .logOut:
-            print("cikis")
+            do {
+                      try Auth.auth().signOut()
+                      let vc = SplashScreen()
+                      vc.modalPresentationStyle = .fullScreen //or .overFullScreen for
+                      self.present(vc, animated: true, completion: nil)
+                  }
+                  catch{
+                      print(error.localizedDescription)
+                  }
         }
        
     }

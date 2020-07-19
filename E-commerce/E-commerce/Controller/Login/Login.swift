@@ -232,9 +232,8 @@ let progres = SVProgressHUD.self
                 let db = Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid)
                          db.getDocument { (docSnap, err) in
                              if err == nil {
-                                 let nextVC = HomeVC()
-                                 
-//                                 nextVC.user = currentUser.init(uid: Auth.auth().currentUser!.uid, dic: docSnap!.data()!)
+                                 let nextVC = ContainerController()
+                                 nextVC.currentUser = CurrentUser.init( dic: docSnap!.data()!)
                                  nextVC.modalPresentationStyle =  .fullScreen
                                  self.present(nextVC, animated: true, completion: nil)
                              }else{

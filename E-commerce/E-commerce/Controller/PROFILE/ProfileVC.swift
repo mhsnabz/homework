@@ -16,8 +16,7 @@ class ProfileVC: UIViewController {
          
             self.nameLbl.text = currentUser.name
             self.email.text = currentUser.email
-            print("addres " + currentUser.addres!)
-            print("city " + currentUser.city!)
+          
             
         }
     }
@@ -97,7 +96,12 @@ class ProfileVC: UIViewController {
                 self.currentUser = CurrentUser.init(dic: docSnap!.data()!)
                 let addres = self.currentUser.addres
                 let city = self.currentUser.city
-                self.address.text = addres! + "\n" + city!
+                if let addres = addres , let city = city{
+                     self.address.text = addres  + "\n" + city
+                }else{
+                    self.address.text = "Adresinizi Ekleyin"
+                }
+               
             }
         }
         

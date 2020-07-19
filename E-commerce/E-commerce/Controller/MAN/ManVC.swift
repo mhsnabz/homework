@@ -92,6 +92,9 @@ extension ManVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 
         if menuOption?.description == "Ayakkabı"{
             vc.titleText = "Erkek Ayakkabı"
+            vc.typeModel = "spor"
+            vc.type = "shoes"
+
         }else  if menuOption?.description == "Pantolon"{
             vc.titleText = "Erkek Pantolon"
         }
@@ -108,7 +111,7 @@ extension ManVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         }else{
             vc.titleText = "Erkek Çeket"
         }
-       
+         vc.gender = "man"
         vc.currentUser = currentUser
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
