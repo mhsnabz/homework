@@ -10,6 +10,9 @@
 		661997A924C32BE600298432 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661997A824C32BE600298432 /* Register.swift */; };
 		661997AF24C3344C00298432 /* wait.json in Resources */ = {isa = PBXBuildFile; fileRef = 661997AE24C3344C00298432 /* wait.json */; };
 		661997B224C338BA00298432 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661997B124C338BA00298432 /* CurrentUser.swift */; };
+		663BF84A24C492550062583F /* Shoes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663BF84924C492550062583F /* Shoes.swift */; };
+		663BF84D24C493620062583F /* ProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663BF84C24C493620062583F /* ProductVC.swift */; };
+		663BF84F24C4974E0062583F /* ShoesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663BF84E24C4974E0062583F /* ShoesCell.swift */; };
 		6676A4CB24C4432000CF6311 /* EditAdress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6676A4CA24C4432000CF6311 /* EditAdress.swift */; };
 		66EEAC1D24C218ED00883EC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC1C24C218ED00883EC6 /* AppDelegate.swift */; };
 		66EEAC1F24C218ED00883EC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC1E24C218ED00883EC6 /* SceneDelegate.swift */; };
@@ -70,6 +73,9 @@
 		661997A824C32BE600298432 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		661997AE24C3344C00298432 /* wait.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wait.json; sourceTree = "<group>"; };
 		661997B124C338BA00298432 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		663BF84924C492550062583F /* Shoes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shoes.swift; sourceTree = "<group>"; };
+		663BF84C24C493620062583F /* ProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVC.swift; sourceTree = "<group>"; };
+		663BF84E24C4974E0062583F /* ShoesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoesCell.swift; sourceTree = "<group>"; };
 		6676A4CA24C4432000CF6311 /* EditAdress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAdress.swift; sourceTree = "<group>"; };
 		66EEAC1924C218ED00883EC6 /* E-commerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-commerce.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66EEAC1C24C218ED00883EC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -156,8 +162,17 @@
 			isa = PBXGroup;
 			children = (
 				661997B124C338BA00298432 /* CurrentUser.swift */,
+				663BF84924C492550062583F /* Shoes.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		663BF84B24C493050062583F /* PRODUCT */ = {
+			isa = PBXGroup;
+			children = (
+				663BF84C24C493620062583F /* ProductVC.swift */,
+			);
+			path = PRODUCT;
 			sourceTree = "<group>";
 		};
 		6676A4C924C4430400CF6311 /* EDIT */ = {
@@ -270,6 +285,7 @@
 		66EEAC5A24C22B3100883EC6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				663BF84B24C493050062583F /* PRODUCT */,
 				6676A4C924C4430400CF6311 /* EDIT */,
 				66EEAC4E24C21B1500883EC6 /* Login */,
 				66EEAC7C24C2CB6700883EC6 /* KID */,
@@ -298,6 +314,7 @@
 				66EEAC6424C23F4700883EC6 /* MenuOptionCell.swift */,
 				66EEAC7D24C2DFE800883EC6 /* HomeVcCell.swift */,
 				66EEAC8124C2FCE800883EC6 /* ManVcCell.swift */,
+				663BF84E24C4974E0062583F /* ShoesCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -587,6 +604,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				663BF84A24C492550062583F /* Shoes.swift in Sources */,
 				66EEAC8224C2FCE800883EC6 /* ManVcCell.swift in Sources */,
 				66EEAC5624C21D1E00883EC6 /* SplashScreen.swift in Sources */,
 				661997B224C338BA00298432 /* CurrentUser.swift in Sources */,
@@ -599,8 +617,10 @@
 				66EEAC8424C3046900883EC6 /* MenuOptionManVC.swift in Sources */,
 				66EEAC5924C224AA00883EC6 /* HomeVC.swift in Sources */,
 				66EEAC7E24C2DFE800883EC6 /* HomeVcCell.swift in Sources */,
+				663BF84D24C493620062583F /* ProductVC.swift in Sources */,
 				66EEAC7424C2CB3600883EC6 /* WomanVC.swift in Sources */,
 				66EEAC2124C218ED00883EC6 /* ViewController.swift in Sources */,
+				663BF84F24C4974E0062583F /* ShoesCell.swift in Sources */,
 				66EEAC5C24C22B4400883EC6 /* ContainerController.swift in Sources */,
 				66EEAC7224C2CB2700883EC6 /* ManVC.swift in Sources */,
 				66EEAC1D24C218ED00883EC6 /* AppDelegate.swift in Sources */,

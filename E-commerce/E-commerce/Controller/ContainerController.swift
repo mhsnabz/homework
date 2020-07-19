@@ -77,6 +77,7 @@ class ContainerController: UIViewController {
         switch menuOPtion {
         case .man:
          let vc = ManVC()
+         vc.currentUser = currentUser
          vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
         case .woman:

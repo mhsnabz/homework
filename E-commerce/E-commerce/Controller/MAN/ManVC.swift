@@ -10,6 +10,8 @@ import UIKit
 private let manCell = "manCell"
 class ManVC: UIViewController {
     
+    var currentUser : CurrentUser!
+    
     let titleLbl : UILabel = {
         let lbl = UILabel()
         lbl.text = "ERKEK"
@@ -83,6 +85,33 @@ extension ManVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (self.view.frame.size.width - 10)/2, height: (self.view.frame.size.height)/3)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ProductVC()
+        let menuOption = manVcOption(rawValue: indexPath.row)
+
+        if menuOption?.description == "Ayakkabı"{
+            vc.titleText = "Erkek Ayakkabı"
+        }else  if menuOption?.description == "Pantolon"{
+            vc.titleText = "Erkek Pantolon"
+        }
+        else  if menuOption?.description == "T-Shirt"{
+            vc.titleText = "Erkek T-Shirt"
+        }
+        else  if menuOption?.description == "Eşofmanlar"{
+            vc.titleText = "Erkek Eşofman"
+        }else  if menuOption?.description == "Şortlar"{
+            vc.titleText = "Erkek Şortlar"
+        }
+        else  if menuOption?.description == "Formalar"{
+            vc.titleText = "Erkek Formalar"
+        }else{
+            vc.titleText = "Erkek Çeket"
+        }
+       
+        vc.currentUser = currentUser
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     
