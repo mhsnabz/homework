@@ -9,9 +9,9 @@
 import Foundation
 class ProductList{
     
-    var image : String?
+    var image : [String]?
     var name : String?
-    var number : String?
+    var number : [Int]?
     var thumbImage : String?
     var value : Double?
     var id : String?
@@ -20,10 +20,10 @@ class ProductList{
         if let name = dic["name"] as? String{
             self.name = name
         }
-        if let image = dic["image"] as? String{
+        if let image = dic["image"] as? [String]{
             self.image = image
         }
-        if let number = dic["number"] as? String{
+        if let number = dic["number"] as? [Int]{
             self.number = number
         }
         if let thumbImage = dic["thumbImage"] as? String{

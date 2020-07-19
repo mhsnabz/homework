@@ -134,6 +134,7 @@ class ProductVC: UIViewController {
                         let model = ProductList.init(id : doc.documentID , dic: doc.data())
                         self.list.append(model)
                         self.collectionview.reloadData()
+                       
                      
                     }
                 }
@@ -199,6 +200,16 @@ extension ProductVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLa
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: (view.frame.height / 2) + 60)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = SingleProduct()
+        vc.productName = list[indexPath.row].name
+        
+        vc.number = list[indexPath.row].number ?? []
+        vc.image = list[indexPath.row].image ?? []
+        vc.currentUser = currentUser
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     
