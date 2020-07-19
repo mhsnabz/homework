@@ -12,6 +12,8 @@ class ContainerController: UIViewController {
 
     var menuController : MenuController!
     var centrelController : UIViewController!
+    var currentUser : CurrentUser!
+    
    public var isExanded = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +89,7 @@ class ContainerController: UIViewController {
                 present(vc, animated: true, completion: nil)
         case .profile:
                 let vc = ProfileVC()
-                 vc.modalPresentationStyle = .fullScreen
+                vc.currentUser = currentUser
                 present(vc, animated: true, completion: nil)
         case .logOut:
             print("cikis")
