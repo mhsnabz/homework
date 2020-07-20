@@ -8,14 +8,21 @@
 
 import UIKit
 import Lottie
+import FirebaseFirestore
+import FirebaseAuth
 private let cellId  = "cellId"
 class HomeVC: UIViewController {
     
+    var currentUser : CurrentUser!{
+        didSet{
+            getCartItems()
+        }
+    }
     var delegate : HomeControllerDelegate?
     var isMenuOpen : Bool = false
     var menu = UIButton()
     var vc : ContainerController?
-    
+    var itemList = [AddToCart]()
     
     
     var collectionview: UICollectionView!
@@ -32,7 +39,7 @@ class HomeVC: UIViewController {
         btn.titleLabel?.font = UIFont(name: Utilities.fontBold, size: 10)
         return btn
     }()
-    
+     var anim = AnimationView()
     lazy var cart : UIView = {
         let view = UIView()
         view.clipsToBounds = true
@@ -42,7 +49,8 @@ class HomeVC: UIViewController {
         view.layer.shadowOffset = CGSize (width: 0, height: 5)
         view.layer.shadowRadius = 8
         view.layer.shadowOpacity = 0.3
-        var anim = AnimationView()
+       let tap = UITapGestureRecognizer(target: self, action: #selector(handleTab))
+       view.addGestureRecognizer(tap)
         anim = .init(name: "car")
         anim.animationSpeed = 1
         anim.loopMode = .loop
@@ -70,7 +78,9 @@ class HomeVC: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
+//        getCartItems()
         carAnimaiton.play()
+        anim.play()
     }
     override func viewWillDisappear(_ animated: Bool) {
         carAnimaiton.stop()
@@ -93,6 +103,33 @@ class HomeVC: UIViewController {
     }
 
     
+    func getCartItems(){
+        let db = Firestore.firestore().collection("user")
+            .document(currentUser.uid!).collection("cart")
+        db.addSnapshotListener { (querySnap, err) in
+            if err == nil {
+                if !querySnap!.isEmpty {
+                    self.badgeBtn.setTitle(querySnap?.documents.count.description, for: .normal)
+                    for doc in querySnap!.documents{
+                        self.itemList.append(AddToCart.init(id: doc.documentID, dic: doc.data()))
+                        
+                    }
+                }else{
+                    self.badgeBtn.isHidden = true
+                }
+                
+            }
+        }
+    }
+    //MARK: -functions
+    @objc func handleTab(){
+
+        let vc = CartVC()
+        vc.currentUser = currentUser
+        
+        self.present(vc, animated: true, completion: nil)
+            
+    }
     func configureCollectionView(){
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
               collectionview = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)

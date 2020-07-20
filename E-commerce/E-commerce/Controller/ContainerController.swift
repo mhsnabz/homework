@@ -12,7 +12,12 @@ class ContainerController: UIViewController {
 
     var menuController : MenuController!
     var centrelController : UIViewController!
-    var currentUser : CurrentUser!
+    var currentUser : CurrentUser!{
+        didSet{
+            let vc = HomeVC()
+            vc.currentUser = currentUser
+        }
+    }
     
    public var isExanded = false
     override func viewDidLoad() {

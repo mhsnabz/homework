@@ -209,6 +209,9 @@ extension ProductVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLa
         vc.number = list[indexPath.row].number ?? []
         vc.image = list[indexPath.row].image ?? []
         vc.currentUser = currentUser
+        vc.gender = gender
+        vc.type = type
+        vc.typeModel = typeModel
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }

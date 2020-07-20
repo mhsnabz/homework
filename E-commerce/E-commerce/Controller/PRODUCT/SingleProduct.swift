@@ -9,20 +9,28 @@
 import UIKit
 private let cellId = "as"
 import SDWebImage
+import FirebaseAuth
+import FirebaseFirestore
 class SingleProduct: UIViewController {
     
     var isSelected = false
-    
+    var gender : String!
     let transparentView = UIView()
     let tableView = UITableView()
     var selectedButton = UIButton()
     var numbers = [Int]()
-    
+    var type : String!
+     var typeModel : String!
     var item : ProductList!{
         didSet{
             self.itemName.text = item.name
             self.value.text = item.value!.description + " ₺"
-            self.stockLbl.text = "Tükenmek Üzere Son " + (item.number?.count.description)! + " ürün"
+            if item.number != nil{
+               self.stockLbl.text = "Tükenmek Üzere Son " + (item.number?.count.description)! + " ürün"
+            }else{
+                self.stockLbl.text = "Stokta Yok"
+            }
+            
         }
     }
     var productName : String!{
@@ -108,6 +116,7 @@ class SingleProduct: UIViewController {
         btn.titleLabel?.font = UIFont(name: Utilities.fontBold, size: 14)
         btn.layer.cornerRadius = 4
         btn.setBackgroundColor(color: .red, forState: .normal)
+        btn.addTarget(self, action: #selector(addToCartFunc), for: .touchUpInside)
         return btn
     }()
     override func viewDidLoad() {
@@ -130,6 +139,39 @@ class SingleProduct: UIViewController {
         addToCart.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, rigth: view.rightAnchor, marginTop: 0, marginLeft: 30, marginBottom: 20, marginRigth: 30, width: 0, heigth: 40)
         
         
+        
+    }
+    @objc func addToCartFunc()
+    {
+        if isSelected{
+            addToCart.isEnabled = true
+          
+            let dic = ["name": item.name!,
+                       "number":Double(selectedButton.titleLabel!.text!)!,
+                       "value":Double(self.item.value!),
+                       "productType":typeModel!,
+                       "type":type!,"gender":gender!,"thumbImage":item.thumbImage!] as [String:Any]
+         
+            let db = Firestore.firestore().collection("user")
+                .document(currentUser!.uid!).collection("cart").document(self.item!.id!)
+            db.setData(dic, merge: true) { (err) in
+                if err == nil {
+                    let db = Firestore.firestore().collection(self.gender!)
+                        .document(self.type!).collection(self.typeModel).document(self.item.id!)
+                    db.updateData([
+                        "number": FieldValue.arrayRemove([Double(self.selectedButton.titleLabel!.text!)!])
+                    ]) { (err) in
+                        if err != nil {
+                            print("err \(err?.localizedDescription as Any)")
+                        }
+                    }
+                    
+                }
+            }
+            
+        }else{
+            addToCart.isEnabled = false
+        }
     }
     @objc func changeImage()
     {
