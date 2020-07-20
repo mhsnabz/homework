@@ -110,6 +110,9 @@ extension UIColor {
     static func mainColor() -> UIColor {
         return  UIColor.init(red: 55/255, green: 99/255, blue: 239/255, alpha: 1)
     }
+    static func dolorColor() -> UIColor {
+          return  UIColor.init(red: 133, green: 187, blue: 101, alpha: 1)
+      }
    static func mainColorTransparent() -> UIColor {
       return  UIColor.init(red: 55/255, green: 99/255, blue: 239/255, alpha: 0.4)
      }

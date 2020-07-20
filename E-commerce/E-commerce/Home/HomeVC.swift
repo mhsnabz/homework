@@ -15,6 +15,8 @@ class HomeVC: UIViewController {
     
     var currentUser : CurrentUser!{
         didSet{
+            print("user \(currentUser)" )
+
             getCartItems()
         }
     }
@@ -78,9 +80,17 @@ class HomeVC: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-//        getCartItems()
+
         carAnimaiton.play()
         anim.play()
+        if currentUser == nil {
+            let db = Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid)
+            db.addSnapshotListener { (docSnap, err) in
+                if err == nil {
+                    self.currentUser = CurrentUser.init(dic: docSnap!.data()!)
+                }
+            }
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         carAnimaiton.stop()
