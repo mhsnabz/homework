@@ -10,7 +10,14 @@ import UIKit
 private let cellId = "as"
 import SDWebImage
 class SingleProduct: UIViewController {
-
+    
+    var isSelected = false
+    
+    let transparentView = UIView()
+    let tableView = UITableView()
+    var selectedButton = UIButton()
+    var numbers = [Int]()
+    
     var item : ProductList!{
         didSet{
             self.itemName.text = item.name
@@ -65,18 +72,18 @@ class SingleProduct: UIViewController {
         return v
     }()
     
-   let itemName : UILabel = {
-           let lbl = UILabel()
-           lbl.font = UIFont(name: Utilities.font, size: 14)
-           lbl.textColor = .darkGray
-           return lbl
-       }()
-       let value : UILabel = {
-           let lbl = UILabel()
-                  lbl.font = UIFont(name: Utilities.font, size: 14)
-                  lbl.textColor = .mainColor()
-                  return lbl
-       }()
+    let itemName : UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont(name: Utilities.font, size: 14)
+        lbl.textColor = .darkGray
+        return lbl
+    }()
+    let value : UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont(name: Utilities.font, size: 14)
+        lbl.textColor = .mainColor()
+        return lbl
+    }()
     
     var sizeChoose : UIButton = {
         let btn = UIButton()
@@ -85,6 +92,7 @@ class SingleProduct: UIViewController {
         btn.titleLabel?.font = UIFont(name: Utilities.font, size: 12)
         btn.layer.cornerRadius = 4
         btn.setBackgroundColor(color: .mainColorTransparent(), forState: .normal)
+        btn.addTarget(self, action: #selector(chooseOrder), for: .touchUpInside)
         return btn
     }()
     let stockLbl : UILabel = {
@@ -94,35 +102,33 @@ class SingleProduct: UIViewController {
         return lbl
     }()
     var addToCart : UIButton = {
-          let btn = UIButton()
-          btn.setTitle("Sepete Ekle", for: .normal)
-          btn.clipsToBounds = true
-          btn.titleLabel?.font = UIFont(name: Utilities.fontBold, size: 14)
-          btn.layer.cornerRadius = 4
-          btn.setBackgroundColor(color: .red, forState: .normal)
-          return btn
-      }()
+        let btn = UIButton()
+        btn.setTitle("Sepete Ekle", for: .normal)
+        btn.clipsToBounds = true
+        btn.titleLabel?.font = UIFont(name: Utilities.fontBold, size: 14)
+        btn.layer.cornerRadius = 4
+        btn.setBackgroundColor(color: .red, forState: .normal)
+        return btn
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureCollectionView()
-//        DispatchQueue.main.async {
-//            self.timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
-//        }
-
+        //        DispatchQueue.main.async {
+        //            self.timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
+        //        }
+        
         view.addSubview(itemName)
-       view.addSubview(value)
-      itemName.anchor(top: collectionview.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: nil, marginTop: 8, marginLeft: 8, marginBottom: 8, marginRigth: 8, width: 0, heigth: 0)
+        view.addSubview(value)
+        itemName.anchor(top: collectionview.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: nil, marginTop: 8, marginLeft: 8, marginBottom: 8, marginRigth: 8, width: 0, heigth: 0)
         value.anchor(top: collectionview.bottomAnchor, left: nil, bottom: nil, rigth: view.rightAnchor, marginTop: 8, marginLeft: 8, marginBottom: 8, marginRigth: 8, width: 0, heigth: 0)
         view.addSubview(stockLbl)
         stockLbl.anchor(top: itemName.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: nil, marginTop: 8, marginLeft: 8, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
-        view.addSubview(sizeChoose)
-        sizeChoose.anchor(top: stockLbl.bottomAnchor, left: nil, bottom: nil, rigth: nil, marginTop: 12, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 200, heigth: 35)
-        sizeChoose.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
+       
+        configureOrderingTB()
         view.addSubview(addToCart)
         addToCart.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, rigth: view.rightAnchor, marginTop: 0, marginLeft: 30, marginBottom: 20, marginRigth: 30, width: 0, heigth: 40)
-
+        
         
     }
     @objc func changeImage()
@@ -140,38 +146,38 @@ class SingleProduct: UIViewController {
     }
     
     var imageStartingFrame : CGRect?
-       var blackBackGround : UIView?
-       func performImageZoomLogic(image : UIImageView){
-           
-           let startingFrame = CGRect(x: 0, y: 70, width: self.collectionview.bounds.width, height: self.collectionview.bounds.height)
-           self.imageStartingFrame = startingFrame
+    var blackBackGround : UIView?
+    func performImageZoomLogic(image : UIImageView){
+        
+        let startingFrame = CGRect(x: 0, y: 70, width: self.collectionview.bounds.width, height: self.collectionview.bounds.height)
+        self.imageStartingFrame = startingFrame
         let zoomingImageView = UIImageView(frame: startingFrame)
-           zoomingImageView.backgroundColor = .black
-           zoomingImageView.image = image.image
-           zoomingImageView.contentMode = .scaleAspectFit
-           zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissImage)))
-           zoomingImageView.isUserInteractionEnabled = true
-           
-           if let keyWindow = UIApplication.shared.windows.filter({$0.isKeyWindow}).first{
-               blackBackGround = UIView(frame: keyWindow.frame)
-               blackBackGround?.backgroundColor = .black
-               blackBackGround?.alpha = 0
-               keyWindow.addSubview(blackBackGround!)
-               keyWindow.addSubview(zoomingImageView)
-               UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-                   self.blackBackGround?.alpha = 1
-                   self.inputAccessoryView?.alpha = 0
+        zoomingImageView.backgroundColor = .black
+        zoomingImageView.image = image.image
+        zoomingImageView.contentMode = .scaleAspectFit
+        zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissImage)))
+        zoomingImageView.isUserInteractionEnabled = true
+        
+        if let keyWindow = UIApplication.shared.windows.filter({$0.isKeyWindow}).first{
+            blackBackGround = UIView(frame: keyWindow.frame)
+            blackBackGround?.backgroundColor = .black
+            blackBackGround?.alpha = 0
+            keyWindow.addSubview(blackBackGround!)
+            keyWindow.addSubview(zoomingImageView)
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                self.blackBackGround?.alpha = 1
+                self.inputAccessoryView?.alpha = 0
                 let h1 = startingFrame.height / startingFrame.width * keyWindow.frame.width
-                   zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: h1)
-                   zoomingImageView.center = keyWindow.center
-               }, completion: nil)
-               
-           }
-           
-           
-           
-           
-       }
+                zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: h1)
+                zoomingImageView.center = keyWindow.center
+            }, completion: nil)
+            
+        }
+        
+        
+        
+        
+    }
     
     @objc func dismissImage(tabGesture : UITapGestureRecognizer){
         
@@ -195,27 +201,66 @@ class SingleProduct: UIViewController {
     func configureCollectionView()  {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-    
-              collectionview = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-              collectionview.dataSource = self
-              collectionview.delegate = self
-              collectionview.backgroundColor = .white
-           
-              collectionview.register(SingleProductCell.self, forCellWithReuseIdentifier: cellId)
-              view.addSubview(collectionview)
-              collectionview.anchor(top: headerBar.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 10, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: view.frame.width, heigth: view.frame.height / 2)
+        
+        collectionview = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionview.dataSource = self
+        collectionview.delegate = self
+        collectionview.backgroundColor = .white
+        
+        collectionview.register(SingleProductCell.self, forCellWithReuseIdentifier: cellId)
+        view.addSubview(collectionview)
+        collectionview.anchor(top: headerBar.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 10, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: view.frame.width, heigth: view.frame.height / 2)
     }
     func configureUI(){
-          view.backgroundColor = .white
-          view.addSubview(headerBar)
-          headerBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 60)
-          dissmisButton.addTarget(self, action: #selector(dissmis), for: .touchUpInside)
+        view.backgroundColor = .white
+        view.addSubview(headerBar)
+        headerBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 60)
+        dissmisButton.addTarget(self, action: #selector(dissmis), for: .touchUpInside)
+    }
+    @objc func dissmis(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    func  configureOrderingTB(){
+      tableView.delegate = self
+      tableView.dataSource = self
+      tableView.register(OrderingCell.self, forCellReuseIdentifier: "id")
+         view.addSubview(sizeChoose)
+                sizeChoose.anchor(top: stockLbl.bottomAnchor, left: nil, bottom: nil, rigth: nil, marginTop: 12, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 200, heigth: 35)
+                sizeChoose.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
       }
-      @objc func dissmis(){
-          self.dismiss(animated: true, completion: nil)
-      }
-  
-
+    //MARK: - handlers
+    @objc func removeTransparentView(){
+         let frame = selectedButton.frame
+         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+                             self.transparentView.alpha = 0
+             self.tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.origin.x , width: frame.width, height:0)
+                         }, completion: nil)
+     }
+         func addTransparentView(frame : CGRect)  {
+             let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+                    transparentView.frame = window?.frame ?? self.view.frame
+                    transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+             tableView.reloadData()
+                    transparentView.alpha = 0
+             self.view.addSubview(transparentView)
+               tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: 0)
+                self.view.addSubview(tableView)
+              tableView.layer.cornerRadius = 5
+            tableView.rowHeight = 40
+             let tapgesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView))
+                 transparentView.addGestureRecognizer(tapgesture)
+               UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+                       self.transparentView.alpha = 0.5
+                 self.tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y  + 40 , width: frame.width, height: 90)
+                   }, completion: nil)
+          }
+    
+    @objc func chooseOrder(){
+        numbers = number!
+        selectedButton = sizeChoose
+        addTransparentView(frame: sizeChoose.frame)
+    }
+    
 }
 extension SingleProduct : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -237,6 +282,30 @@ extension SingleProduct : UICollectionViewDataSource, UICollectionViewDelegateFl
         imageView.contentMode = .scaleAspectFit
         imageView.sd_setImage(with: URL(string: image![indexPath.row]), completed: nil)
         performImageZoomLogic(image: imageView)
+    }
+    
+    
+}
+extension SingleProduct : UITableViewDelegate , UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return numbers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "id", for: indexPath) as! OrderingCell
+        cell.textLabel?.text = numbers[indexPath.row].description
+        return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     
+        return 50
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        sizeChoose.setTitle(numbers[indexPath.row].description, for: .normal)
+             sizeChoose.backgroundColor = .mainColor()
+        isSelected = true
+//        orderBySection(value: ordering[indexPath.row])
+        self.removeTransparentView()
     }
     
     
