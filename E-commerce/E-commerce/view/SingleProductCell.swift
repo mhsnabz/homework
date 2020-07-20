@@ -12,10 +12,10 @@ class SingleProductCell: UICollectionViewCell
 {
     let img : UIImageView = {
           let img = UIImageView()
-           img.contentMode = .scaleAspectFill
-        img.image = UIImage(named: "logo")
+        img.contentMode = .scaleAspectFill
            return img
        }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(img)

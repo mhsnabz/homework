@@ -31,6 +31,7 @@ class ProductVC: UIViewController {
             titleLbl.text = titleText
         }
     }
+    
     var currentUser : CurrentUser!
      var collectionview: UICollectionView!
     var order : UIButton = {
@@ -204,7 +205,7 @@ extension ProductVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = SingleProduct()
         vc.productName = list[indexPath.row].name
-        
+        vc.item = list[indexPath.row]
         vc.number = list[indexPath.row].number ?? []
         vc.image = list[indexPath.row].image ?? []
         vc.currentUser = currentUser

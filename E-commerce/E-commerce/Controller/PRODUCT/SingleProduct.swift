@@ -11,6 +11,13 @@ private let cellId = "as"
 import SDWebImage
 class SingleProduct: UIViewController {
 
+    var item : ProductList!{
+        didSet{
+            self.itemName.text = item.name
+            self.value.text = item.value!.description + " ₺"
+            self.stockLbl.text = "Tükenmek Üzere Son " + (item.number?.count.description)! + " ürün"
+        }
+    }
     var productName : String!{
         didSet{
             titleLbl.text = productName
@@ -57,14 +64,64 @@ class SingleProduct: UIViewController {
         
         return v
     }()
+    
+   let itemName : UILabel = {
+           let lbl = UILabel()
+           lbl.font = UIFont(name: Utilities.font, size: 14)
+           lbl.textColor = .darkGray
+           return lbl
+       }()
+       let value : UILabel = {
+           let lbl = UILabel()
+                  lbl.font = UIFont(name: Utilities.font, size: 14)
+                  lbl.textColor = .mainColor()
+                  return lbl
+       }()
+    
+    var sizeChoose : UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Beden Seçin", for: .normal)
+        btn.clipsToBounds = true
+        btn.titleLabel?.font = UIFont(name: Utilities.font, size: 12)
+        btn.layer.cornerRadius = 4
+        btn.setBackgroundColor(color: .mainColorTransparent(), forState: .normal)
+        return btn
+    }()
+    let stockLbl : UILabel = {
+        let lbl = UILabel ()
+        lbl.textColor = .red
+        lbl.font = UIFont(name: Utilities.font, size: 12)
+        return lbl
+    }()
+    var addToCart : UIButton = {
+          let btn = UIButton()
+          btn.setTitle("Sepete Ekle", for: .normal)
+          btn.clipsToBounds = true
+          btn.titleLabel?.font = UIFont(name: Utilities.fontBold, size: 14)
+          btn.layer.cornerRadius = 4
+          btn.setBackgroundColor(color: .red, forState: .normal)
+          return btn
+      }()
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureCollectionView()
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
-        }
-       
+//        DispatchQueue.main.async {
+//            self.timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
+//        }
+
+        view.addSubview(itemName)
+       view.addSubview(value)
+      itemName.anchor(top: collectionview.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: nil, marginTop: 8, marginLeft: 8, marginBottom: 8, marginRigth: 8, width: 0, heigth: 0)
+        value.anchor(top: collectionview.bottomAnchor, left: nil, bottom: nil, rigth: view.rightAnchor, marginTop: 8, marginLeft: 8, marginBottom: 8, marginRigth: 8, width: 0, heigth: 0)
+        view.addSubview(stockLbl)
+        stockLbl.anchor(top: itemName.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: nil, marginTop: 8, marginLeft: 8, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
+        view.addSubview(sizeChoose)
+        sizeChoose.anchor(top: stockLbl.bottomAnchor, left: nil, bottom: nil, rigth: nil, marginTop: 12, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 200, heigth: 35)
+        sizeChoose.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        view.addSubview(addToCart)
+        addToCart.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, rigth: view.rightAnchor, marginTop: 0, marginLeft: 30, marginBottom: 20, marginRigth: 30, width: 0, heigth: 40)
 
         
     }
@@ -81,6 +138,60 @@ class SingleProduct: UIViewController {
             counter += 1
         }
     }
+    
+    var imageStartingFrame : CGRect?
+       var blackBackGround : UIView?
+       func performImageZoomLogic(image : UIImageView){
+           
+           let startingFrame = CGRect(x: 0, y: 70, width: self.collectionview.bounds.width, height: self.collectionview.bounds.height)
+           self.imageStartingFrame = startingFrame
+        let zoomingImageView = UIImageView(frame: startingFrame)
+           zoomingImageView.backgroundColor = .black
+           zoomingImageView.image = image.image
+           zoomingImageView.contentMode = .scaleAspectFit
+           zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissImage)))
+           zoomingImageView.isUserInteractionEnabled = true
+           
+           if let keyWindow = UIApplication.shared.windows.filter({$0.isKeyWindow}).first{
+               blackBackGround = UIView(frame: keyWindow.frame)
+               blackBackGround?.backgroundColor = .black
+               blackBackGround?.alpha = 0
+               keyWindow.addSubview(blackBackGround!)
+               keyWindow.addSubview(zoomingImageView)
+               UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                   self.blackBackGround?.alpha = 1
+                   self.inputAccessoryView?.alpha = 0
+                let h1 = startingFrame.height / startingFrame.width * keyWindow.frame.width
+                   zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: h1)
+                   zoomingImageView.center = keyWindow.center
+               }, completion: nil)
+               
+           }
+           
+           
+           
+           
+       }
+    
+    @objc func dismissImage(tabGesture : UITapGestureRecognizer){
+        
+        
+        
+        if  let zoomOutImageView = tabGesture.view {
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                zoomOutImageView.frame = self.imageStartingFrame!
+                self.blackBackGround?.alpha = 0
+                self.inputAccessoryView?.alpha = 1
+            }) { (bool) in
+                zoomOutImageView.removeFromSuperview()
+            }
+            
+            
+        }
+        
+    }
+    
     func configureCollectionView()  {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -89,7 +200,7 @@ class SingleProduct: UIViewController {
               collectionview.dataSource = self
               collectionview.delegate = self
               collectionview.backgroundColor = .white
-              collectionview.isPagingEnabled = true
+           
               collectionview.register(SingleProductCell.self, forCellWithReuseIdentifier: cellId)
               view.addSubview(collectionview)
               collectionview.anchor(top: headerBar.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 10, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: view.frame.width, heigth: view.frame.height / 2)
@@ -113,16 +224,19 @@ extension SingleProduct : UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SingleProductCell
-        cell.img.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 2)
+        cell.img.frame = CGRect(x: 0, y: 0,width: collectionView.bounds.width, height: collectionView.bounds.height )
         cell.img.sd_setImage(with: URL(string: image![indexPath.row]), placeholderImage: UIImage(named: "logo"), completed: nil)
         return cell
         
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height )
+        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height )
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+        let imageView  = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.sd_setImage(with: URL(string: image![indexPath.row]), completed: nil)
+        performImageZoomLogic(image: imageView)
     }
     
     
