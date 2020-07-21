@@ -117,7 +117,7 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
         
        
         
-        total += list[indexPath.row].value
+        total += list[indexPath.row].value.rounded(toPlaces: 2)
         self.totalPrice.text = "Toplam: " + self.total.description + " ₺"
         if list[indexPath.row].gender == "man"{
             cell.gender.text = "Erkek"
@@ -160,8 +160,12 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
 }
 extension CartVC : CartFooterDelegate{
     func odemeYap(for footer: CartFooter) {
-        print("ödeme yap")
-    } 
+       let vc = PayamentVC()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
 }
 extension CartVC : CartCellDelegate {
     func removeItem(for cell: CartCell) {

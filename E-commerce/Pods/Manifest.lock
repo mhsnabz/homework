@@ -165,6 +165,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - CreditCardForm (0.2.0)
   - DynamicBlurView (4.0.0)
   - Firebase (6.16.0):
     - Firebase/Core (= 6.16.0)
@@ -322,12 +323,14 @@ PODS:
   - SDWebImage (5.5.2):
     - SDWebImage/Core (= 5.5.2)
   - SDWebImage/Core (5.5.2)
+  - Stripe (19.3.0)
   - SVProgressHUD (2.2.5)
   - SwiftyAttributes (5.1.1)
   - TweeTextField (1.6.0)
 
 DEPENDENCIES:
   - ActiveLabel
+  - CreditCardForm
   - Firebase
   - Firebase/Analytics
   - Firebase/Auth
@@ -342,6 +345,7 @@ DEPENDENCIES:
   - PopupDialog (~> 1.1)
   - RevealingSplashView
   - SDWebImage (~> 5.0)
+  - Stripe (~> 19.3.0)
   - SVProgressHUD
   - SwiftyAttributes
   - TweeTextField
@@ -351,6 +355,7 @@ SPEC REPOS:
     - abseil
     - ActiveLabel
     - BoringSSL-GRPC
+    - CreditCardForm
     - DynamicBlurView
     - Firebase
     - FirebaseAnalytics
@@ -384,6 +389,7 @@ SPEC REPOS:
     - Protobuf
     - RevealingSplashView
     - SDWebImage
+    - Stripe
     - SVProgressHUD
     - SwiftyAttributes
     - TweeTextField
@@ -392,6 +398,7 @@ SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  CreditCardForm: bba4aad545236f97f2dc45ea3bed0cb57d5e0e99
   DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
   Firebase: 497158b816d0a86fc31babbd05546fcd7e6083ff
   FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
@@ -425,10 +432,11 @@ SPEC CHECKSUMS:
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
+  Stripe: dd5bfdd5f1daed4f9ddbfb47e9449ec302f9f708
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyAttributes: e3e13891ddac3c62b3d7798d5c3969cea88e62bb
   TweeTextField: 2bfb6c48fdbf6eb8038260430244c9f6ebb47bce
 
-PODFILE CHECKSUM: ad90aa00161f407b562fefeff2900a0d10452e5f
+PODFILE CHECKSUM: 52fcb476b54f31ff77172b5202e384e32d3dd68d
 
 COCOAPODS: 1.8.4
