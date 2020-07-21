@@ -10,6 +10,7 @@ import UIKit
 
 class CartCell: UICollectionViewCell
 {
+    var delegate : CartCellDelegate?
     
     let price : UILabel = {
        let lbl = UILabel()
@@ -59,6 +60,7 @@ class CartCell: UICollectionViewCell
                  lbl.textColor = .darkGray
            return lbl
        }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(img)
@@ -88,8 +90,12 @@ class CartCell: UICollectionViewCell
         addSubview(stack)
         stack.anchor(top: nil, left: img.rightAnchor, bottom: nil, rigth: price.leftAnchor, marginTop: 0, marginLeft: 8, marginBottom: 0, marginRigth: 8, width: 0, heigth: 0)
         stack.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        deleteButton.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
     }
-    
+    @objc func deleteItem(){
+        delegate?.removeItem(for : self)
+    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

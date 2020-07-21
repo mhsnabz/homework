@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseFirestore
 private let cellID = "id"
+private let footerID = "footerID"
 class CartVC: UIViewController {
     var currentUser : CurrentUser!{
         didSet{
@@ -66,6 +67,7 @@ class CartVC: UIViewController {
                collectionview.delegate = self
                collectionview.backgroundColor = .white
                collectionview.register(CartCell.self, forCellWithReuseIdentifier: cellID)
+        collectionview.register(CartFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerID)
                view.addSubview(collectionview)
                collectionview.anchor(top: totalPrice.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, rigth: view.rightAnchor, marginTop: 10, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
      }
@@ -108,6 +110,7 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! CartCell
+        cell.delegate = self
         cell.img.frame = CGRect(x: 10, y: 10, width: 80, height: 80)
         cell.img.sd_setImage(with: URL(string: list[indexPath.row].thumbImage!), completed: nil)
         cell.price.text = list[indexPath.row].value.description + " ₺"
@@ -132,8 +135,36 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
         
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+           switch kind {
+                 
+             case UICollectionView.elementKindSectionFooter:
+                 let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerID , for: indexPath) as! CartFooter
+                 footerView.delegate = self
+                 
+                 return footerView
+           default:
+            assert(false, "Unexpected element kind")
+        }
+                 
+               
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: 200, height: 60)
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 100)
     }
     
+}
+extension CartVC : CartFooterDelegate{
+    func odemeYap(for footer: CartFooter) {
+        print("ödeme yap")
+    } 
+}
+extension CartVC : CartCellDelegate {
+    func removeItem(for cell: CartCell) {
+        print("remove")
+    }
 }

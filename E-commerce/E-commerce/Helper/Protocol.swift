@@ -9,3 +9,9 @@
 protocol HomeControllerDelegate {
     func handleMenuToggle(forMenuOption menuOption : MenuOption?)
 }
+protocol CartFooterDelegate{
+    func odemeYap(for footer : CartFooter)
+}
+protocol CartCellDelegate{
+    func removeItem(for cell : CartCell)
+}

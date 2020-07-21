@@ -45,7 +45,9 @@ class SingleProduct: UIViewController {
     }
     var number : [Int]?{
         didSet{
-            print("number : \( number!.count) " )
+            number?.sort(by: { (i, i2) -> Bool in
+                return i < i2
+            })
         }
     }
     
