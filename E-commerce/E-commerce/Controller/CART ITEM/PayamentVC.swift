@@ -65,7 +65,7 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
                createTextField()
                
                cardParams = STPPaymentMethodCardParams()
-               cardParams.number = "375987654321111"
+               cardParams.number = "3434343434343434"
                cardParams.expMonth = 03
                cardParams.expYear = 23
                cardParams.cvc = "7997"
