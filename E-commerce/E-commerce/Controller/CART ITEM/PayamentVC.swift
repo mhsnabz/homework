@@ -68,7 +68,7 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
                cardParams.number = "3434343434343434"
                cardParams.expMonth = 03
                cardParams.expYear = 23
-               cardParams.cvc = "7997"
+               cardParams.cvc = "808"
                self.paymentTextField.cardParams = cardParams
         addDoneButtonOnKeyboard()
         
