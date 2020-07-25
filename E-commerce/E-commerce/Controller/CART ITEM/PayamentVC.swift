@@ -11,14 +11,14 @@ import CreditCardForm
 import Stripe
 
 class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextFieldDelegate  {
-
+    
     let paymentTextField = STPPaymentCardTextField()
     private var cardHolderNameTextField: TextField!
     private var cardParams: STPPaymentMethodCardParams!
     
     let titleLbl : UILabel = {
         let lbl = UILabel()
-
+        
         lbl.font = UIFont(name: Utilities.font, size: 15)
         lbl.textColor = .white
         return lbl
@@ -44,7 +44,7 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
     }()
     
     lazy var creditCardView : CreditCardFormView = {
-       let creditCardView = CreditCardFormView()
+        let creditCardView = CreditCardFormView()
         creditCardView.cardHolderString = "Mazlum ABUL"
         creditCardView.cardGradientColors[Brands.Amex.rawValue] = [UIColor.red, UIColor.black]
         creditCardView.cardNumberFont = UIFont(name: "HelveticaNeue", size: 20)!
@@ -52,7 +52,7 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
         creditCardView.cardTextFont = UIFont(name: "HelveticaNeue", size: 12)!
         return creditCardView
     }()
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -61,15 +61,14 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
         creditCardView.anchor(top: headerBar.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 8, marginLeft: 8, marginBottom: 8, marginRigth: 8, width: 0, heigth: 190)
         
         paymentTextField.postalCodeEntryEnabled = false
-               
-               createTextField()
-               
-               cardParams = STPPaymentMethodCardParams()
-               cardParams.number = "3434343434343434"
-               cardParams.expMonth = 02
-               cardParams.expYear = 17
-               cardParams.cvc = "808"
-               self.paymentTextField.cardParams = cardParams
+        
+        createTextField()
+        cardParams = STPPaymentMethodCardParams()
+        cardParams.number = "3434343434343434"
+        cardParams.expMonth = 02
+        cardParams.expYear = 17
+        cardParams.cvc = "808"
+        self.paymentTextField.cardParams = cardParams
         addDoneButtonOnKeyboard()
         
     }
@@ -77,35 +76,35 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
     func addDoneButtonOnKeyboard(){
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
-
+        
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let done: UIBarButtonItem = UIBarButtonItem(title: "Bitti", style: .done, target: self, action: #selector(self.doneButtonAction))
-
+        
         let items = [flexSpace, done]
         doneToolbar.items = items
         doneToolbar.sizeToFit()
-
+        
         paymentTextField.inputAccessoryView = doneToolbar
     }
-
+    
     @objc func doneButtonAction(){
         paymentTextField.resignFirstResponder()
     }
-  
+    
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-         creditCardView.cardHolderString = textField.text!
-     }
-     
-     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-         if textField == cardHolderNameTextField {
-             textField.resignFirstResponder()
-             paymentTextField.becomeFirstResponder()
-         } else if textField == paymentTextField  {
-             textField.resignFirstResponder()
-         }
-         return true
-     }
+        creditCardView.cardHolderString = textField.text!
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == cardHolderNameTextField {
+            textField.resignFirstResponder()
+            paymentTextField.becomeFirstResponder()
+        } else if textField == paymentTextField  {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
     
     func createTextField() {
         
@@ -145,31 +144,31 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
             paymentTextField.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
-        func configureUI(){
-          view.backgroundColor = .white
-          view.addSubview(headerBar)
-          headerBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 60)
-          dissmisButton.addTarget(self, action: #selector(dissmis), for: .touchUpInside)
-      }
+    func configureUI(){
+        view.backgroundColor = .white
+        view.addSubview(headerBar)
+        headerBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 60)
+        dissmisButton.addTarget(self, action: #selector(dissmis), for: .touchUpInside)
+    }
     @objc func dissmis() {
-           self.dismiss(animated: true, completion: nil)
-       }
-
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
-           creditCardView.paymentCardTextFieldDidChange(cardNumber: textField.cardNumber, expirationYear: textField.expirationYear, expirationMonth: textField.expirationMonth, cvc: textField.cvc)
-       }
-       
-       func paymentCardTextFieldDidEndEditingExpiration(_ textField: STPPaymentCardTextField) {
-           creditCardView.paymentCardTextFieldDidEndEditingExpiration(expirationYear: textField.expirationYear)
-       }
-       
-       func paymentCardTextFieldDidBeginEditingCVC(_ textField: STPPaymentCardTextField) {
-           creditCardView.paymentCardTextFieldDidBeginEditingCVC()
-       }
-       
-       func paymentCardTextFieldDidEndEditingCVC(_ textField: STPPaymentCardTextField) {
-           creditCardView.paymentCardTextFieldDidEndEditingCVC()
-       }
+        creditCardView.paymentCardTextFieldDidChange(cardNumber: textField.cardNumber, expirationYear: textField.expirationYear, expirationMonth: textField.expirationMonth, cvc: textField.cvc)
+    }
+    
+    func paymentCardTextFieldDidEndEditingExpiration(_ textField: STPPaymentCardTextField) {
+        creditCardView.paymentCardTextFieldDidEndEditingExpiration(expirationYear: textField.expirationYear)
+    }
+    
+    func paymentCardTextFieldDidBeginEditingCVC(_ textField: STPPaymentCardTextField) {
+        creditCardView.paymentCardTextFieldDidBeginEditingCVC()
+    }
+    
+    func paymentCardTextFieldDidEndEditingCVC(_ textField: STPPaymentCardTextField) {
+        creditCardView.paymentCardTextFieldDidEndEditingCVC()
+    }
 }
 extension  UITextField {
     
@@ -186,17 +185,17 @@ extension  UITextField {
 }
 
 class TextField: UITextField {
-
+    
     let padding = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-
+    
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
     }
-
+    
     override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
     }
-
+    
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
     }
