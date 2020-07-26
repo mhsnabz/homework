@@ -192,8 +192,7 @@ extension ProductVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: shoesId, for: indexPath) as! ShoesCell
         
         cell.img.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 2)
-        
-        cell.img.sd_setImage(with: URL(string: list[indexPath.row].thumbImage!) , completed: nil)
+       cell.img.sd_setImage(with: URL(string: list[indexPath.row].thumbImage!) , completed: nil)
         cell.name.text = list[indexPath.row].name
         cell.value.text = list[indexPath.row].value!.description + " ₺"
         return cell

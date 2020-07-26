@@ -11,7 +11,7 @@ import UIKit
 class ShoesCell: UICollectionViewCell {
     let img : UIImageView = {
        let img = UIImageView()
-        img.contentMode = .scaleAspectFill
+        img.contentMode = .scaleAspectFit
         return img
     }()
     let name : UILabel = {
