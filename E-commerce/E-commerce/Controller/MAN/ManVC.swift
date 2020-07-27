@@ -92,7 +92,7 @@ extension ManVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 
         if menuOption?.description == "Ayakkabı"{
             vc.titleText = "Erkek Ayakkabı"
-            vc.typeModel = "spor"
+            vc.typeModel = "shoes"
             vc.type = "shoes"
 
         }else  if menuOption?.description == "Pantolon"{

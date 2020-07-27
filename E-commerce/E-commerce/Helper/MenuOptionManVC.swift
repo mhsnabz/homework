@@ -14,7 +14,7 @@ enum manVcOption : Int ,CustomStringConvertible {
       case tshirt
       case gym
       case sortlar
-      case formlar
+      case formalar
   
     
       
@@ -30,7 +30,7 @@ enum manVcOption : Int ,CustomStringConvertible {
               return "Eşofmanlar"
           case .sortlar:
               return "Şortlar"
-          case .formlar:
+          case .formalar:
               return "Formalar"
           case .ceketler:
             return "Çeketler"
@@ -43,7 +43,7 @@ enum manVcOption : Int ,CustomStringConvertible {
           case .pantolon : return UIImage(named: "pantolon")!
           case.tshirt : return UIImage(named: "tshirt")!
           case .ceketler : return UIImage(named: "ceketler")!
-          case .formlar: return UIImage(named: "formalar")!
+          case .formalar: return UIImage(named: "formalar")!
                case .gym: return UIImage(named: "gym")!
           case .sortlar : return UIImage(named :"sortlar")!
           }
