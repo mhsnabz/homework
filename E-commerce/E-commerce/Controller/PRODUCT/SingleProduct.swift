@@ -323,7 +323,7 @@ extension SingleProduct : UICollectionViewDataSource, UICollectionViewDelegateFl
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let imageView  = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.sd_setImage(with: URL(string: image![indexPath.row]), completed: nil)
         performImageZoomLogic(image: imageView)
     }

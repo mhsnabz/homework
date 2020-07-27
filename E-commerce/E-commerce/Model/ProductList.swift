@@ -20,7 +20,7 @@ class ProductList{
         if let name = dic["name"] as? String{
             self.name = name
         }
-        if let image = dic["image"] as? [String]{
+        if let image = dic["images"] as? [String]{
             self.image = image
         }
         if let number = dic["number"] as? [Int]{

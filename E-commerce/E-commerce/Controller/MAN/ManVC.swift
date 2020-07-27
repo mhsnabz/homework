@@ -89,29 +89,41 @@ extension ManVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProductVC()
         let menuOption = manVcOption(rawValue: indexPath.row)
-
+   
         if menuOption?.description == "Ayakkabı"{
             vc.titleText = "Erkek Ayakkabı"
             vc.typeModel = "shoes"
             vc.type = "shoes"
-
+            
         }else  if menuOption?.description == "Pantolon"{
             vc.titleText = "Erkek Pantolon"
+            vc.typeModel = "pantolon"
+            vc.type = "pantolon"
         }
         else  if menuOption?.description == "T-Shirt"{
             vc.titleText = "Erkek T-Shirt"
+            vc.typeModel = "tshirt"
+            vc.type = "tshirt"
         }
         else  if menuOption?.description == "Eşofmanlar"{
             vc.titleText = "Erkek Eşofman"
+            vc.typeModel = "gym"
+            vc.type = "gym"
         }else  if menuOption?.description == "Şortlar"{
             vc.titleText = "Erkek Şortlar"
+            vc.typeModel = "sortlar"
+            vc.type = "sortlar"
         }
         else  if menuOption?.description == "Formalar"{
             vc.titleText = "Erkek Formalar"
+            vc.typeModel = "formalar"
+            vc.type = "formalar"
         }else{
             vc.titleText = "Erkek Çeket"
+            vc.typeModel = "ceketler"
+            vc.type = "ceketler"
         }
-         vc.gender = "man"
+        vc.gender = "man"
         vc.currentUser = currentUser
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)

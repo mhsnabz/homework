@@ -12,7 +12,7 @@ class SingleProductCell: UICollectionViewCell
 {
     let img : UIImageView = {
           let img = UIImageView()
-        img.contentMode = .scaleAspectFill
+        img.contentMode = .scaleAspectFit
            return img
        }()
 
