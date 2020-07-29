@@ -75,7 +75,7 @@ extension WomanVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: manCell, for: indexPath) as! ManVcCell
-        let menuOption = manVcOption(rawValue: indexPath.row)
+        let menuOption = womanVcOption(rawValue: indexPath.row)
         cell.img.image = menuOption?.image
         cell.name.text = menuOption?.description
         return cell

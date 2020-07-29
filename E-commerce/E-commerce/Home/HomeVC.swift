@@ -15,7 +15,7 @@ class HomeVC: UIViewController {
     
     var currentUser : CurrentUser!{
         didSet{
-            print("user \(currentUser)" )
+
 
             getCartItems()
         }
