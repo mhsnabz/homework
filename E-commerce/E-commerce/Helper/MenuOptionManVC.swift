@@ -44,7 +44,49 @@ enum manVcOption : Int ,CustomStringConvertible {
           case.tshirt : return UIImage(named: "tshirt")!
           case .ceketler : return UIImage(named: "ceketler")!
           case .formalar: return UIImage(named: "formalar")!
-               case .gym: return UIImage(named: "gym")!
+          case .gym: return UIImage(named: "gym")!
+          case .sortlar : return UIImage(named :"sortlar")!
+          }
+      }
+}
+enum womanVcOption : Int ,CustomStringConvertible {
+     case ayakkabi
+      case pantolon
+      case ceketler
+      case tshirt
+      case gym
+      case sortlar
+      case formalar
+  
+    
+      
+      var description: String{
+          switch self {
+          case .ayakkabi:
+              return "Ayakkabı"
+          case .pantolon :
+              return "Pantolon"
+          case.tshirt:
+              return "T-Shirt"
+          case .gym:
+              return "Eşofmanlar"
+          case .sortlar:
+              return "Şortlar"
+          case .formalar:
+              return "Formalar"
+          case .ceketler:
+            return "Çeketler"
+          
+          }
+      }
+      var image : UIImage {
+          switch self {
+          case .ayakkabi : return UIImage(named: "woman-shoes")!
+          case .pantolon : return UIImage(named: "pantolon")!
+          case.tshirt : return UIImage(named: "tshirt")!
+          case .ceketler : return UIImage(named: "ceketler")!
+          case .formalar: return UIImage(named: "formalar")!
+        case .gym: return UIImage(named: "gym")!
           case .sortlar : return UIImage(named :"sortlar")!
           }
       }

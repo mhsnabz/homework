@@ -7,10 +7,11 @@
 //
 
 import UIKit
+private let manCell = "manCell"
 
 class WomanVC: UIViewController {
 
-  
+      var currentUser : CurrentUser!
     let titleLbl : UILabel = {
        let lbl = UILabel()
         lbl.text = "KADIN"
@@ -37,11 +38,12 @@ class WomanVC: UIViewController {
         
         return v
     }()
-    
+        var collectionview: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
      configureUI()
+        configureCollectionView()
     }
     
 
@@ -54,5 +56,76 @@ class WomanVC: UIViewController {
     @objc func dissmis(){
         self.dismiss(animated: true, completion: nil)
     }
+    func configureCollectionView(){
+           let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+           collectionview = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+           collectionview.dataSource = self
+           collectionview.delegate = self
+           collectionview.backgroundColor = .white
+           collectionview.register(ManVcCell.self, forCellWithReuseIdentifier: manCell)
+           view.addSubview(collectionview)
+           collectionview.anchor(top: headerBar.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, rigth: view.rightAnchor, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
+       }
 
+}
+extension WomanVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 7
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: manCell, for: indexPath) as! ManVcCell
+        let menuOption = manVcOption(rawValue: indexPath.row)
+        cell.img.image = menuOption?.image
+        cell.name.text = menuOption?.description
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (self.view.frame.size.width - 10)/2, height: (self.view.frame.size.height)/3)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ProductVC()
+        let menuOption = womanVcOption(rawValue: indexPath.row)
+   
+        if menuOption?.description == "Ayakkabı"{
+            vc.titleText = "Kadın Ayakkabı"
+            vc.typeModel = "shoes"
+            vc.type = "shoes"
+            
+        }else  if menuOption?.description == "Pantolon"{
+            vc.titleText = "Kadın Pantolon"
+            vc.typeModel = "pantolon"
+            vc.type = "pantolon"
+        }
+        else  if menuOption?.description == "T-Shirt"{
+            vc.titleText = "Kadın T-Shirt"
+            vc.typeModel = "tshirt"
+            vc.type = "tshirt"
+        }
+        else  if menuOption?.description == "Eşofmanlar"{
+            vc.titleText = "Kadın Eşofman"
+            vc.typeModel = "gym"
+            vc.type = "gym"
+        }else  if menuOption?.description == "Şortlar"{
+            vc.titleText = "Kadın Şortlar"
+            vc.typeModel = "sortlar"
+            vc.type = "sortlar"
+        }
+        else  if menuOption?.description == "Formalar"{
+            vc.titleText = "Kadın Formalar"
+            vc.typeModel = "formalar"
+            vc.type = "formalar"
+        }else{
+            vc.titleText = "Kadın Çeket"
+            vc.typeModel = "ceketler"
+            vc.type = "ceketler"
+        }
+        vc.gender = "woman"
+        vc.currentUser = currentUser
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
 }

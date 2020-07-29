@@ -154,6 +154,7 @@ class SingleProduct: UIViewController {
                        "productType":typeModel!,
                        "type":type!,"gender":gender!,"thumbImage":item.thumbImage!] as [String:Any]
          
+
             let db = Firestore.firestore().collection("user")
                 .document(currentUser!.uid!).collection("cart").document(self.item!.id!)
             db.setData(dic, merge: true) { (err) in
@@ -167,7 +168,7 @@ class SingleProduct: UIViewController {
                             print("err \(err?.localizedDescription as Any)")
                         }
                     }
-                    
+
                 }
             }
             

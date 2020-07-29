@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 class ContainerController: UIViewController {
-
+    
     var menuController : MenuController!
     var centrelController : UIViewController!
     var currentUser : CurrentUser!{
@@ -19,15 +19,15 @@ class ContainerController: UIViewController {
         }
     }
     
-   public var isExanded = false
+    public var isExanded = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         configureHomeContainerController()
         
     }
-        
+    
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .darkContent
     }
@@ -37,7 +37,7 @@ class ContainerController: UIViewController {
     override var prefersStatusBarHidden: Bool{
         return isExanded
     }
-
+    
     func configureHomeContainerController(){
         let homeController = HomeVC()
         homeController.delegate = self
@@ -63,15 +63,15 @@ class ContainerController: UIViewController {
                 self.centrelController.view.frame.origin.x = self.centrelController.view.frame.width - 80
             }, completion: nil)
         }else{
-             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-                            self.centrelController.view.frame.origin.x = 0
-                   }) { (_) in
-                       guard let menuOption = menuOption else{return}
-                       self.didSelectMenuOption(menuOPtion: menuOption)
-                   }
-         
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                self.centrelController.view.frame.origin.x = 0
+            }) { (_) in
+                guard let menuOption = menuOption else{return}
+                self.didSelectMenuOption(menuOPtion: menuOption)
+            }
+            
         }
-          
+        
     }
     func animateStatusBar(){
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
@@ -81,49 +81,51 @@ class ContainerController: UIViewController {
     func didSelectMenuOption (menuOPtion : MenuOption){
         switch menuOPtion {
         case .man:
-         let vc = ManVC()
-         vc.currentUser = currentUser
-         vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+            let vc = ManVC()
+            vc.currentUser = currentUser
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
         case .woman:
-              let vc = WomanVC()
-                 vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
+            let vc = WomanVC()
+            vc.currentUser = currentUser
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
         case .kid:
-               let vc = KidVC()
-                 vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
+            let vc = KidVC()
+//            vc.currentUser = currentUser
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
         case .profile:
-                let vc = ProfileVC()
-                vc.currentUser = currentUser
-                present(vc, animated: true, completion: nil)
+            let vc = ProfileVC()
+            vc.currentUser = currentUser
+            present(vc, animated: true, completion: nil)
         case .logOut:
             do {
-                      try Auth.auth().signOut()
-                      let vc = SplashScreen()
-                      vc.modalPresentationStyle = .fullScreen //or .overFullScreen for
-                      self.present(vc, animated: true, completion: nil)
-                  }
-                  catch{
-                      print(error.localizedDescription)
-                  }
+                try Auth.auth().signOut()
+                let vc = SplashScreen()
+                vc.modalPresentationStyle = .fullScreen //or .overFullScreen for
+                self.present(vc, animated: true, completion: nil)
+            }
+            catch{
+                print(error.localizedDescription)
+            }
         }
-       
+        
     }
-
+    
 }
 
 extension ContainerController : HomeControllerDelegate {
     func handleMenuToggle(forMenuOption menuOption: MenuOption?) {
-            if !isExanded{
-                 configureMenuController()
-            }
-            isExanded = !isExanded
+        if !isExanded{
+            configureMenuController()
+        }
+        isExanded = !isExanded
         showMenuController(shouldExpand: isExanded, menuOption: menuOption)
     }
     
     
     
 }
-               
+
 
