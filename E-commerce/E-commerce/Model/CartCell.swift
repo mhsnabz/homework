@@ -13,20 +13,20 @@ class CartCell: UICollectionViewCell
     var delegate : CartCellDelegate?
     
     let price : UILabel = {
-       let lbl = UILabel()
+        let lbl = UILabel()
         lbl.font = UIFont(name: Utilities.font, size: 14)
         lbl.textColor = .mainColor()
         return lbl
     }()
     let img : UIImageView = {
-       let img = UIImageView()
+        let img = UIImageView()
         img.contentMode = .scaleAspectFit
         img.clipsToBounds = true
         img.layer.cornerRadius = 10
         return img
     }()
     let line : UIView = {
-       let v = UIView()
+        let v = UIView()
         v.backgroundColor = .mainColorTransparent()
         return v
     }()
@@ -37,7 +37,7 @@ class CartCell: UICollectionViewCell
     }()
     
     let itemName : UILabel = {
-       let lbl = UILabel()
+        let lbl = UILabel()
         lbl.font = UIFont(name: Utilities.font, size: 14)
         lbl.textColor = .black
         return lbl
@@ -50,16 +50,16 @@ class CartCell: UICollectionViewCell
     }()
     let gender : UILabel = {
         let lbl = UILabel()
-              lbl.font = UIFont(name: Utilities.font, size: 14)
-              lbl.textColor = .darkGray
+        lbl.font = UIFont(name: Utilities.font, size: 14)
+        lbl.textColor = .darkGray
         return lbl
     }()
     let type  : UILabel = {
-           let lbl = UILabel()
-                 lbl.font = UIFont(name: Utilities.font, size: 14)
-                 lbl.textColor = .darkGray
-           return lbl
-       }()
+        let lbl = UILabel()
+        lbl.font = UIFont(name: Utilities.font, size: 14)
+        lbl.textColor = .darkGray
+        return lbl
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,13 +68,13 @@ class CartCell: UICollectionViewCell
         addSubview(deleteButton)
         deleteButton.anchor(top: nil, left: nil, bottom: nil, rigth: rightAnchor, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 12, width: 20, heigth: 20)
         deleteButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-
+        
         addSubview(price)
         price.anchor(top: nil, left: nil, bottom: nil, rigth: deleteButton.leftAnchor, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 12, width: 0, heigth: 16)
         price.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         addSubview(line)
         line.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, rigth: rightAnchor, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0.4)
-            
+        
         let stackType = UIStackView(arrangedSubviews: [gender,type,itemType])
         stackType.alignment = .leading
         stackType.axis = .horizontal
