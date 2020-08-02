@@ -23,54 +23,54 @@ class CartVC: UIViewController {
         lbl.textColor = .systemGreen
         return lbl
     }()
-   var collectionview: UICollectionView!
+    var collectionview: UICollectionView!
     let titleLbl : UILabel = {
-          let lbl = UILabel()
-          lbl.text = "Alışverişi Tamamla"
-          lbl.font = UIFont(name: Utilities.font, size: 15)
-          lbl.textColor = .white
-          return lbl
-      }()
-      let dissmisButton : UIButton = {
-          let btn = UIButton()
-          btn.setImage(UIImage(named: "close"), for: .normal)
-          
-          return btn
-      }()
-      lazy var headerBar : UIView = {
-          let v = UIView()
-          v.backgroundColor = .menuColor()
-          v.addSubview(dissmisButton)
-          dissmisButton.anchor(top: nil, left: v.leftAnchor, bottom: nil, rigth: nil, marginTop: 0, marginLeft: 20, marginBottom: 0, marginRigth: 0, width: 20, heigth: 20)
-          dissmisButton.centerYAnchor.constraint(equalTo: v.centerYAnchor).isActive = true
-          v.addSubview(titleLbl)
-          titleLbl.anchor(top: nil, left: nil, bottom: nil, rigth: nil, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
-          titleLbl.centerYAnchor.constraint(equalTo: v.centerYAnchor).isActive = true
-          titleLbl.centerXAnchor.constraint(equalTo: v.centerXAnchor).isActive = true
-          
-          return v
-      }()
+        let lbl = UILabel()
+        lbl.text = "Alışverişi Tamamla"
+        lbl.font = UIFont(name: Utilities.font, size: 15)
+        lbl.textColor = .white
+        return lbl
+    }()
+    let dissmisButton : UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "close"), for: .normal)
+        
+        return btn
+    }()
+    lazy var headerBar : UIView = {
+        let v = UIView()
+        v.backgroundColor = .menuColor()
+        v.addSubview(dissmisButton)
+        dissmisButton.anchor(top: nil, left: v.leftAnchor, bottom: nil, rigth: nil, marginTop: 0, marginLeft: 20, marginBottom: 0, marginRigth: 0, width: 20, heigth: 20)
+        dissmisButton.centerYAnchor.constraint(equalTo: v.centerYAnchor).isActive = true
+        v.addSubview(titleLbl)
+        titleLbl.anchor(top: nil, left: nil, bottom: nil, rigth: nil, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
+        titleLbl.centerYAnchor.constraint(equalTo: v.centerYAnchor).isActive = true
+        titleLbl.centerXAnchor.constraint(equalTo: v.centerXAnchor).isActive = true
+        
+        return v
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
-       configureUI()
+        configureUI()
         view.addSubview(totalPrice)
         totalPrice.anchor(top: headerBar.bottomAnchor, left: nil, bottom: nil, rigth: nil, marginTop: 8, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
         totalPrice.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         configureCollectionView()
-      getCartList()
-      
+        getCartList()
+        
     }
     func configureCollectionView()  {
-         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-               collectionview = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-               collectionview.dataSource = self
-               collectionview.delegate = self
-               collectionview.backgroundColor = .white
-               collectionview.register(CartCell.self, forCellWithReuseIdentifier: cellID)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        collectionview = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionview.dataSource = self
+        collectionview.delegate = self
+        collectionview.backgroundColor = .white
+        collectionview.register(CartCell.self, forCellWithReuseIdentifier: cellID)
         collectionview.register(CartFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerID)
-               view.addSubview(collectionview)
-               collectionview.anchor(top: totalPrice.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, rigth: view.rightAnchor, marginTop: 10, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
-     }
+        view.addSubview(collectionview)
+        collectionview.anchor(top: totalPrice.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, rigth: view.rightAnchor, marginTop: 10, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
+    }
     func configureUI(){
         view.backgroundColor = .white
         view.addSubview(headerBar)
@@ -89,10 +89,10 @@ class CartVC: UIViewController {
                 if !querySnap!.isEmpty{
                     for doc in querySnap!.documentChanges{
                         if doc.type == .added{
-                        
+                            
                             self.list.append(AddToCart.init(id: doc.document.documentID, dic: doc.document.data()))
                             self.collectionview.reloadData()
-                           
+                            
                         }
                         
                     }
@@ -100,8 +100,8 @@ class CartVC: UIViewController {
             }
         }
     }
- 
-
+    
+    
 }
 extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -115,7 +115,7 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
         cell.img.sd_setImage(with: URL(string: list[indexPath.row].thumbImage!), completed: nil)
         cell.price.text = list[indexPath.row].value.description + " ₺"
         
-       
+        
         
         total += list[indexPath.row].value.rounded(toPlaces: 2)
         self.totalPrice.text = "Toplam: " + self.total.description + " ₺"
@@ -123,8 +123,8 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
             cell.gender.text = "Erkek"
         }
         if list[indexPath.row].gender == "woman"{
-                   cell.gender.text = "Kadın"
-               }
+            cell.gender.text = "Kadın"
+        }
         if list[indexPath.row].type == "shoes" {
             cell.itemType.text = "Ayakkabı"
         }
@@ -136,18 +136,18 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-           switch kind {
-                 
-             case UICollectionView.elementKindSectionFooter:
-                 let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerID , for: indexPath) as! CartFooter
-                 footerView.delegate = self
-                 
-                 return footerView
-           default:
+        switch kind {
+            
+        case UICollectionView.elementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerID , for: indexPath) as! CartFooter
+            footerView.delegate = self
+            
+            return footerView
+        default:
             assert(false, "Unexpected element kind")
         }
-                 
-               
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
@@ -160,7 +160,7 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
 }
 extension CartVC : CartFooterDelegate{
     func odemeYap(for footer: CartFooter) {
-       let vc = PayamentVC()
+        let vc = PayamentVC()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
