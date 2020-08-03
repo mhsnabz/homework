@@ -20,13 +20,13 @@ class SingleProduct: UIViewController {
     var selectedButton = UIButton()
     var numbers = [Int]()
     var type : String!
-     var typeModel : String!
+    var typeModel : String!
     var item : ProductList!{
         didSet{
             self.itemName.text = item.name
             self.value.text = item.value!.description + " ₺"
             if item.number != nil{
-               self.stockLbl.text = "Tükenmek Üzere Son " + (item.number?.count.description)! + " ürün"
+                self.stockLbl.text = "Tükenmek Üzere Son " + (item.number?.count.description)! + " ürün"
             }else{
                 self.stockLbl.text = "Stokta Yok"
             }
@@ -135,7 +135,7 @@ class SingleProduct: UIViewController {
         value.anchor(top: collectionview.bottomAnchor, left: nil, bottom: nil, rigth: view.rightAnchor, marginTop: 8, marginLeft: 8, marginBottom: 8, marginRigth: 8, width: 0, heigth: 0)
         view.addSubview(stockLbl)
         stockLbl.anchor(top: itemName.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: nil, marginTop: 8, marginLeft: 8, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
-       
+        
         configureOrderingTB()
         view.addSubview(addToCart)
         addToCart.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, rigth: view.rightAnchor, marginTop: 0, marginLeft: 30, marginBottom: 20, marginRigth: 30, width: 0, heigth: 40)
@@ -147,14 +147,14 @@ class SingleProduct: UIViewController {
     {
         if isSelected{
             addToCart.isEnabled = true
-          
+            
             let dic = ["name": item.name!,
                        "number":Double(selectedButton.titleLabel!.text!)!,
                        "value":Double(self.item.value!),
                        "productType":typeModel!,
                        "type":type!,"gender":gender!,"thumbImage":item.thumbImage!] as [String:Any]
-         
-
+            
+            
             let db = Firestore.firestore().collection("user")
                 .document(currentUser!.uid!).collection("cart").document(self.item!.id!)
             db.setData(dic, merge: true) { (err) in
@@ -168,7 +168,7 @@ class SingleProduct: UIViewController {
                             print("err \(err?.localizedDescription as Any)")
                         }
                     }
-
+                    
                 }
             }
             
@@ -266,39 +266,39 @@ class SingleProduct: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     func  configureOrderingTB(){
-      tableView.delegate = self
-      tableView.dataSource = self
-      tableView.register(OrderingCell.self, forCellReuseIdentifier: "id")
-         view.addSubview(sizeChoose)
-                sizeChoose.anchor(top: stockLbl.bottomAnchor, left: nil, bottom: nil, rigth: nil, marginTop: 12, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 200, heigth: 35)
-                sizeChoose.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-      }
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(OrderingCell.self, forCellReuseIdentifier: "id")
+        view.addSubview(sizeChoose)
+        sizeChoose.anchor(top: stockLbl.bottomAnchor, left: nil, bottom: nil, rigth: nil, marginTop: 12, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 200, heigth: 35)
+        sizeChoose.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
     //MARK: - handlers
     @objc func removeTransparentView(){
-         let frame = selectedButton.frame
-         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
-                             self.transparentView.alpha = 0
-             self.tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.origin.x , width: frame.width, height:0)
-                         }, completion: nil)
-     }
-         func addTransparentView(frame : CGRect)  {
-             let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-                    transparentView.frame = window?.frame ?? self.view.frame
-                    transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-             tableView.reloadData()
-                    transparentView.alpha = 0
-             self.view.addSubview(transparentView)
-               tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: 0)
-                self.view.addSubview(tableView)
-              tableView.layer.cornerRadius = 5
-            tableView.rowHeight = 40
-             let tapgesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView))
-                 transparentView.addGestureRecognizer(tapgesture)
-               UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
-                       self.transparentView.alpha = 0.5
-                 self.tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y  + 40 , width: frame.width, height: 90)
-                   }, completion: nil)
-          }
+        let frame = selectedButton.frame
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+            self.transparentView.alpha = 0
+            self.tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.origin.x , width: frame.width, height:0)
+        }, completion: nil)
+    }
+    func addTransparentView(frame : CGRect)  {
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        transparentView.frame = window?.frame ?? self.view.frame
+        transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        tableView.reloadData()
+        transparentView.alpha = 0
+        self.view.addSubview(transparentView)
+        tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: 0)
+        self.view.addSubview(tableView)
+        tableView.layer.cornerRadius = 5
+        tableView.rowHeight = 40
+        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView))
+        transparentView.addGestureRecognizer(tapgesture)
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+            self.transparentView.alpha = 0.5
+            self.tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y  + 40 , width: frame.width, height: 90)
+        }, completion: nil)
+    }
     
     @objc func chooseOrder(){
         numbers = number!
@@ -342,14 +342,14 @@ extension SingleProduct : UITableViewDelegate , UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-     
+        
         return 50
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         sizeChoose.setTitle(numbers[indexPath.row].description, for: .normal)
-             sizeChoose.backgroundColor = .mainColor()
+        sizeChoose.backgroundColor = .mainColor()
         isSelected = true
-//        orderBySection(value: ordering[indexPath.row])
+        //        orderBySection(value: ordering[indexPath.row])
         self.removeTransparentView()
     }
     
