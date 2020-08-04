@@ -11,7 +11,6 @@ enum GenderHelper : Int ,CustomStringConvertible {
     case man
     case woman
     case kid
-   
     
     var description: String{
         switch self {
