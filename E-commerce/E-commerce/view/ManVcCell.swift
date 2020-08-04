@@ -9,9 +9,9 @@
 import UIKit
 
 class ManVcCell: UICollectionViewCell {
-  
+    
     let name : UILabel = {
-       let lbl = UILabel()
+        let lbl = UILabel()
         lbl.text = "Ayakkabı"
         lbl.font = UIFont(name: Utilities.fontBold, size: 14)
         lbl.textColor = .darkGray
@@ -37,7 +37,7 @@ class ManVcCell: UICollectionViewCell {
         view.layer.shouldRasterize = true
         view.layer.rasterizationScale = UIScreen.main.scale
         view.backgroundColor = UIColor(displayP3Red: 245, green: 245, blue: 245, alpha: 1)
-       
+        
         view.addSubview(name)
         name.anchor(top: view.topAnchor, left: nil, bottom: nil, rigth: nil, marginTop: 8, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 15)
         name.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -46,13 +46,13 @@ class ManVcCell: UICollectionViewCell {
         
         return view
     }()
-       override init(frame: CGRect) {
-           super.init(frame: frame)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         addSubview(v)
         v.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, rigth: rightAnchor, marginTop: 10, marginLeft: 10, marginBottom: 10, marginRigth: 10, width: 0, heigth: 0)
-       }
-       
-       required init?(coder: NSCoder) {
-           fatalError("init(coder:) has not been implemented")
-       }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

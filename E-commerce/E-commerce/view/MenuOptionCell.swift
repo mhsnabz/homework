@@ -9,21 +9,21 @@
 import UIKit
 
 class MenuOptionCell: UITableViewCell {
-
+    
     let typeImage : UIImageView = {
-       let img = UIImageView()
-       
+        let img = UIImageView()
+        
         img.contentMode = .scaleAspectFit
         return img
     }()
     let name : UILabel = {
-       let lbl = UILabel()
+        let lbl = UILabel()
         lbl.font = UIFont(name: Utilities.font, size: 14)
         lbl.text = "sample text"
         lbl.textColor = .black
         return lbl
     }()
- 
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(typeImage)
@@ -34,7 +34,7 @@ class MenuOptionCell: UITableViewCell {
         name.anchor(top: nil, left: typeImage.rightAnchor, bottom: nil, rigth: nil, marginTop: 0, marginLeft: 10, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
         name.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         selectionStyle = .none
-            
+        
     }
     
     required init?(coder: NSCoder) {
