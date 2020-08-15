@@ -10,6 +10,12 @@ import UIKit
 
 class CartCell: UICollectionViewCell
 {
+    
+    var list : AddToCart?{
+        didSet{
+            print("set")
+        }
+    }
     var delegate : CartCellDelegate?
     
     let price : UILabel = {
