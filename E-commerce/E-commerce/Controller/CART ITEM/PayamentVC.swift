@@ -155,7 +155,7 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
         ])
         
         view.addSubview(odemeYap)
-        odemeYap.anchor(top: paymentTextField.bottomAnchor, left: nil, bottom: nil, rigth: nil, marginTop: 20, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 40)
+        odemeYap.anchor(top: nil, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, rigth: view.rightAnchor, marginTop: 20, marginLeft: 50, marginBottom: 20, marginRigth:50, width: 0, heigth: 40)
         odemeYap.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     func configureUI(){
@@ -171,9 +171,21 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
     func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
         creditCardView.paymentCardTextFieldDidChange(cardNumber: textField.cardNumber, expirationYear: textField.expirationYear, expirationMonth: textField.expirationMonth, cvc: textField.cvc)
         if textField.isValid {
-            print("card is valid")
+            odemeYap.isHidden = false
+            odemeYap.setTitleColor(.white, for: .normal)
+            odemeYap.setBackgroundColor(color: .red, forState: .normal)
+            odemeYap.setTitle("Ödeme Yap", for: .normal)
+             odemeYap.titleLabel?.font = UIFont(name: Utilities.font, size: 14)
+              odemeYap.layer.cornerRadius = 8
+            
         }else{
-            print("card is not valid")
+            odemeYap.isHidden = true
+         odemeYap.setTitle("Ödeme Yap", for: .disabled)
+            odemeYap.setBackgroundColor(color: .mainColorTransparent(), forState: .disabled)
+            odemeYap.titleLabel?.font = UIFont(name: Utilities.font, size: 14)
+            odemeYap.setTitleColor(.white, for: .disabled)
+            odemeYap.clipsToBounds = true
+            odemeYap.layer.cornerRadius = 8
         }
     }
     
