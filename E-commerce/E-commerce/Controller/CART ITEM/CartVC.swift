@@ -169,6 +169,30 @@ extension CartVC : CartFooterDelegate{
 }
 extension CartVC : CartCellDelegate {
     func removeItem(for cell: CartCell) {
-      print("items \(cell.list)")
+        ///man/ceketler/ceketler/DRAKE BLUE BLACK ATHLETIC
+        guard let gender = cell.list?.gender else { return }
+        guard let type = cell.list?.type else { return }
+        guard let name = cell.list?.name else { return }
+        guard let size = cell.list?.number else { return }
+        
+        let ref = Firestore.firestore().collection(gender)
+            .document(type).collection(type).document(name)
+        
+        ref.updateData(["number" : FieldValue.arrayUnion([Double(size)])]) { (err) in
+            if err != nil {
+                print("err \(err.debugDescription)!")
+            }else{
+                let ref_delete = Firestore.firestore().collection("user")
+                    .document(self.currentUser!.uid!).collection("cart").document(name)
+                ref_delete.delete { (err) in
+                    if err == nil {
+                        self.dissmis()
+                        
+                    }
+                }
+            }
+        }
+  
+       
     }
 }
