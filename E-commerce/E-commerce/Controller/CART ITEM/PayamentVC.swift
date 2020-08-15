@@ -15,7 +15,17 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
     let paymentTextField = STPPaymentCardTextField()
     private var cardHolderNameTextField: TextField!
     private var cardParams: STPPaymentMethodCardParams!
-    
+
+    let odemeYap : UIButton = {
+        let btn  = UIButton()
+        btn.setTitle("Ödeme Yap", for: .disabled)
+        btn.setBackgroundColor(color: .mainColorTransparent(), forState: .disabled)
+        btn.titleLabel?.font = UIFont(name: Utilities.font, size: 14)
+        btn.setTitleColor(.white, for: .disabled)
+        
+        return btn
+    }()
+
     let titleLbl : UILabel = {
         let lbl = UILabel()
         
@@ -143,6 +153,10 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
             paymentTextField.widthAnchor.constraint(equalToConstant: self.view.frame.size.width-20),
             paymentTextField.heightAnchor.constraint(equalToConstant: 44)
         ])
+        
+        view.addSubview(odemeYap)
+        odemeYap.anchor(top: paymentTextField.bottomAnchor, left: nil, bottom: nil, rigth: nil, marginTop: 20, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 40)
+        odemeYap.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     func configureUI(){
         view.backgroundColor = .white
@@ -156,6 +170,11 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
     
     func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
         creditCardView.paymentCardTextFieldDidChange(cardNumber: textField.cardNumber, expirationYear: textField.expirationYear, expirationMonth: textField.expirationMonth, cvc: textField.cvc)
+        if textField.isValid {
+            print("card is valid")
+        }else{
+            print("card is not valid")
+        }
     }
     
     func paymentCardTextFieldDidEndEditingExpiration(_ textField: STPPaymentCardTextField) {

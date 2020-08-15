@@ -141,7 +141,10 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
         case UICollectionView.elementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerID , for: indexPath) as! CartFooter
             footerView.delegate = self
-            
+            if list.count == 0 {
+                footerView.btn.setTitle("Sepetiniz Boş", for: .normal)
+                footerView.btn.setBackgroundColor(color: .mainColorTransparent(), forState: .normal)
+            }
             return footerView
         default:
             assert(false, "Unexpected element kind")
