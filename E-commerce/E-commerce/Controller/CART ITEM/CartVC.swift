@@ -10,6 +10,7 @@ import UIKit
 import FirebaseFirestore
 private let cellID = "id"
 private let footerID = "footerID"
+import SVProgressHUD
 class CartVC: UIViewController {
     var currentUser : CurrentUser!{
         didSet{
@@ -141,7 +142,7 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
         case UICollectionView.elementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerID , for: indexPath) as! CartFooter
             footerView.delegate = self
-            if list.count == 0 {
+            if list.isEmpty{
                 footerView.btn.setTitle("Sepetiniz Boş", for: .normal)
                 footerView.btn.setBackgroundColor(color: .mainColorTransparent(), forState: .normal)
             }
@@ -172,7 +173,10 @@ extension CartVC : CartFooterDelegate{
 }
 extension CartVC : CartCellDelegate {
     func removeItem(for cell: CartCell) {
-        ///man/ceketler/ceketler/DRAKE BLUE BLACK ATHLETIC
+        SVProgressHUD.setBackgroundColor(.mainColor())
+        SVProgressHUD.setFont(UIFont(name: Utilities.font, size: 12)!)
+        SVProgressHUD.setForegroundColor(.white)
+        SVProgressHUD.show(withStatus: "Siliniyor")
         guard let gender = cell.list?.gender else { return }
         guard let type = cell.list?.type else { return }
         guard let name = cell.list?.name else { return }
@@ -189,6 +193,7 @@ extension CartVC : CartCellDelegate {
                     .document(self.currentUser!.uid!).collection("cart").document(name)
                 ref_delete.delete { (err) in
                     if err == nil {
+                        SVProgressHUD.showSuccess(withStatus: "Silindi")
                         self.dissmis()
                         
                     }

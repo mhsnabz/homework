@@ -70,6 +70,8 @@ class Utilities  {
         SVProgressHUD.dismiss(withDelay: time)
     }
     
+  
+    
 }
 extension UIView{
     func anchor(top : NSLayoutYAxisAnchor?

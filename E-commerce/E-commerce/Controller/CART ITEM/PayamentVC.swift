@@ -9,7 +9,7 @@
 import UIKit
 import CreditCardForm
 import Stripe
-
+import SVProgressHUD
 class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextFieldDelegate  {
     
     let paymentTextField = STPPaymentCardTextField()
@@ -66,7 +66,7 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
+
         view.addSubview(creditCardView)
         creditCardView.anchor(top: headerBar.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 8, marginLeft: 8, marginBottom: 8, marginRigth: 8, width: 0, heigth: 190)
         

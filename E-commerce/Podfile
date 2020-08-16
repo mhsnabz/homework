@@ -48,6 +48,8 @@ pod 'TweeTextField'
 
 pod "CreditCardForm"
 
+pod 'SVProgressHUD'
+
   target 'E-commerceTests' do
     inherit! :search_paths
     # Pods for testing

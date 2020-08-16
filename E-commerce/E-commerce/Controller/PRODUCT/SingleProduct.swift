@@ -11,6 +11,7 @@ private let cellId = "as"
 import SDWebImage
 import FirebaseAuth
 import FirebaseFirestore
+import SVProgressHUD
 class SingleProduct: UIViewController {
     
     var isSelected = false
@@ -146,6 +147,13 @@ class SingleProduct: UIViewController {
     @objc func addToCartFunc()
     {
         if isSelected{
+                SVProgressHUD.setBackgroundColor(.mainColor())
+              SVProgressHUD.setFont(UIFont(name: Utilities.font, size: 12)!)
+            SVProgressHUD.setDefaultStyle(.custom)
+            SVProgressHUD.setBorderColor(.white)
+              SVProgressHUD.show(withStatus: "Ekleniyor")
+            SVProgressHUD.setForegroundColor(.white)
+        
             addToCart.isEnabled = true
             
             let dic = ["name": item.name!,
@@ -166,6 +174,12 @@ class SingleProduct: UIViewController {
                     ]) { (err) in
                         if err != nil {
                             print("err \(err?.localizedDescription as Any)")
+                                SVProgressHUD.showError(withStatus: "Hata Oluştur")
+             
+                            
+                        }else{
+                        SVProgressHUD.showSuccess(withStatus: "Eklendi")
+                            self.dissmis()
                         }
                     }
                     
