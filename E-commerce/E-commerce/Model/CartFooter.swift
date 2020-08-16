@@ -13,7 +13,7 @@ class CartFooter: UICollectionViewCell {
     var list : AddToCart?
     let btn : UIButton = {
         let btn = UIButton()
-        btn.setTitle("Ödeme Yap", for: .normal)
+
         btn.clipsToBounds = true
         btn.titleLabel?.font = UIFont(name: Utilities.font, size: 14)
         btn.setBackgroundColor(color: .red, forState: .normal)

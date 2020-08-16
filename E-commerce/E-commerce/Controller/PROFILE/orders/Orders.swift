@@ -82,7 +82,7 @@ class Orders: UIViewController {
     }
     private func getCartList(){
         let db = Firestore.firestore().collection("user")
-            .document(currentUser.uid!).collection("cart")
+            .document(currentUser.uid!).collection("orders")
         db.addSnapshotListener { (querySnap, err) in
             if err == nil{
                 if !querySnap!.isEmpty{
@@ -150,10 +150,12 @@ extension Orders : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
             footerView.delegate = self
             
             if list.isEmpty{
-                footerView.btn.setTitle("Bekleyen Siparişiniz Yok", for: .normal)
-                footerView.btn.setBackgroundColor(color: .mainColorTransparent(), forState: .normal)
+            footerView.btn.setTitle("Bekleyen Siparişiniz Yok", for: .disabled)
+                
             }else{
-                footerView.btn.setTitle("Siparisleri İptal Et", for: .normal)
+     
+                 footerView.btn.setTitle("Siparisleri İptal Et", for: .normal)
+                footerView.btn.setBackgroundColor(color: .mainColor(), forState: .normal)
             }
             return footerView
         default:
