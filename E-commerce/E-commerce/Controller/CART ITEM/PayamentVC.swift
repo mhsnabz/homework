@@ -10,12 +10,16 @@ import UIKit
 import CreditCardForm
 import Stripe
 import SVProgressHUD
+import FirebaseAuth
+import FirebaseFirestore
 class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextFieldDelegate  {
     
     let paymentTextField = STPPaymentCardTextField()
     private var cardHolderNameTextField: TextField!
     private var cardParams: STPPaymentMethodCardParams!
-
+    var total : Double = 0.0
+    var list = [AddToCart]()
+    var currentUser : CurrentUser?
     let odemeYap : UIButton = {
         let btn  = UIButton()
         btn.setTitle("Ödeme Yap", for: .disabled)
@@ -25,7 +29,7 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
         
         return btn
     }()
-
+    
     let titleLbl : UILabel = {
         let lbl = UILabel()
         
@@ -49,7 +53,7 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
         titleLbl.anchor(top: nil, left: nil, bottom: nil, rigth: nil, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 0)
         titleLbl.centerYAnchor.constraint(equalTo: v.centerYAnchor).isActive = true
         titleLbl.centerXAnchor.constraint(equalTo: v.centerXAnchor).isActive = true
-        
+        titleLbl.text = total.description +  " ₺"
         return v
     }()
     
@@ -66,7 +70,7 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-
+        
         view.addSubview(creditCardView)
         creditCardView.anchor(top: headerBar.bottomAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 8, marginLeft: 8, marginBottom: 8, marginRigth: 8, width: 0, heigth: 190)
         
@@ -157,12 +161,48 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
         view.addSubview(odemeYap)
         odemeYap.anchor(top: nil, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, rigth: view.rightAnchor, marginTop: 20, marginLeft: 50, marginBottom: 20, marginRigth:50, width: 0, heigth: 40)
         odemeYap.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        odemeYap.addTarget(self, action: #selector(odemeYapFunc), for: .touchUpInside)
     }
     func configureUI(){
         view.backgroundColor = .white
         view.addSubview(headerBar)
         headerBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, rigth: view.rightAnchor, marginTop: 0, marginLeft: 0, marginBottom: 0, marginRigth: 0, width: 0, heigth: 60)
         dissmisButton.addTarget(self, action: #selector(dissmis), for: .touchUpInside)
+    }
+    @objc func odemeYapFunc()
+    {
+        
+        SVProgressHUD.setBackgroundColor(.mainColor())
+        SVProgressHUD.setFont(UIFont(name: Utilities.font, size: 12)!)
+        SVProgressHUD.setForegroundColor(.white)
+        SVProgressHUD.show(withStatus: "Ödeme Yapılıyor")
+        guard let user = currentUser else { return }
+        
+        let db = Firestore.firestore().collection("user").document(user.uid!).collection("cart")
+        db.getDocuments { (querySnap, err) in
+            if err == nil {
+                for doc in querySnap!.documents{
+                    db.document(doc.documentID).delete { (err) in
+                        if err == nil {
+                            
+                            let dbb = Firestore.firestore().collection("user").document(user.uid!).collection("orders").document(doc.documentID)
+                            dbb.setData(doc.data(), merge: true) { (err) in
+                                if err == nil {
+                                    SVProgressHUD.dismiss()
+                                    SVProgressHUD.showSuccess(withStatus: "Ödeme Başarılı")
+                                    SVProgressHUD.dismiss(withDelay: 1000)
+                                    
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            self.dissmis()
+        }
+        
+        
     }
     @objc func dissmis() {
         self.dismiss(animated: true, completion: nil)

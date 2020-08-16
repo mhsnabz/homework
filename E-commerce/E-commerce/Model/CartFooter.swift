@@ -10,6 +10,7 @@ import UIKit
 
 class CartFooter: UICollectionViewCell {
     var delegate : CartFooterDelegate?
+    var list : AddToCart?
     let btn : UIButton = {
         let btn = UIButton()
         btn.setTitle("Ödeme Yap", for: .normal)

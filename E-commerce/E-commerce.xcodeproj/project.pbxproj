@@ -23,6 +23,7 @@
 		66749FC324C6CC0900B039FF /* CartFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66749FC224C6CC0900B039FF /* CartFooter.swift */; };
 		66749FC524C6F97400B039FF /* PayamentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66749FC424C6F97400B039FF /* PayamentVC.swift */; };
 		6676A4CB24C4432000CF6311 /* EditAdress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6676A4CA24C4432000CF6311 /* EditAdress.swift */; };
+		669F504524E9134A007233CE /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669F504424E9134A007233CE /* Orders.swift */; };
 		66EEAC1D24C218ED00883EC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC1C24C218ED00883EC6 /* AppDelegate.swift */; };
 		66EEAC1F24C218ED00883EC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC1E24C218ED00883EC6 /* SceneDelegate.swift */; };
 		66EEAC2124C218ED00883EC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EEAC2024C218ED00883EC6 /* ViewController.swift */; };
@@ -95,6 +96,7 @@
 		66749FC224C6CC0900B039FF /* CartFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartFooter.swift; sourceTree = "<group>"; };
 		66749FC424C6F97400B039FF /* PayamentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayamentVC.swift; sourceTree = "<group>"; };
 		6676A4CA24C4432000CF6311 /* EditAdress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAdress.swift; sourceTree = "<group>"; };
+		669F504424E9134A007233CE /* Orders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
 		66EEAC1924C218ED00883EC6 /* E-commerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-commerce.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66EEAC1C24C218ED00883EC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66EEAC1E24C218ED00883EC6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,14 @@
 				6676A4CA24C4432000CF6311 /* EditAdress.swift */,
 			);
 			path = EDIT;
+			sourceTree = "<group>";
+		};
+		669F504324E9132D007233CE /* orders */ = {
+			isa = PBXGroup;
+			children = (
+				669F504424E9134A007233CE /* Orders.swift */,
+			);
+			path = orders;
 			sourceTree = "<group>";
 		};
 		66EEAC1024C218ED00883EC6 = {
@@ -373,6 +383,7 @@
 		66EEAC7B24C2CB5F00883EC6 /* PROFILE */ = {
 			isa = PBXGroup;
 			children = (
+				669F504324E9132D007233CE /* orders */,
 				66EEAC7724C2CB5000883EC6 /* ProfileVC.swift */,
 			);
 			path = PROFILE;
@@ -645,6 +656,7 @@
 				661997B224C338BA00298432 /* CurrentUser.swift in Sources */,
 				66EEAC6724C2441300883EC6 /* MenuOption.swift in Sources */,
 				66EEAC6524C23F4700883EC6 /* MenuOptionCell.swift in Sources */,
+				669F504524E9134A007233CE /* Orders.swift in Sources */,
 				663BF85124C4B7FF0062583F /* ProductList.swift in Sources */,
 				66EEAC8024C2E19000883EC6 /* CollectionViewOption.swift in Sources */,
 				66EEAC6124C231BE00883EC6 /* MenuController.swift in Sources */,

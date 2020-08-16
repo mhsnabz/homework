@@ -173,7 +173,7 @@ class ProfileVC: UIViewController {
         btn.titleLabel?.font = UIFont(name: Utilities.fontBold, size: 13)!
                  btn.layer.cornerRadius = 10
            btn.setTitleColor(.white, for: .normal)
-        //                 btn.addTarget(self, action: #selector(loginPage), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(orders), for: .touchUpInside)
         btn.backgroundColor = UIColor.mainColor()
         return btn
     }()
@@ -191,6 +191,11 @@ class ProfileVC: UIViewController {
     
     
     //MARK: - handlers
+    @objc func orders(){
+        let vc = Orders()
+                vc.currentUser = currentUser
+        self.present(vc, animated: true)
+    }
     @objc func editAddress(){
         let vc = EditAdress()
         vc.currentUser = currentUser

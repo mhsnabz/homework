@@ -1,8 +1,8 @@
 //
-//  CartVC.swift
+//  Orders.swift
 //  E-commerce
 //
-//  Created by mahsun abuzeyitoğlu on 20.07.2020.
+//  Created by mahsun abuzeyitoğlu on 16.08.2020.
 //  Copyright © 2020 mahsun abuzeyitoğlu. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import FirebaseFirestore
 private let cellID = "id"
 private let footerID = "footerID"
 import SVProgressHUD
-class CartVC: UIViewController {
+class Orders: UIViewController {
     var currentUser : CurrentUser!{
         didSet{
         }
@@ -27,7 +27,7 @@ class CartVC: UIViewController {
     var collectionview: UICollectionView!
     let titleLbl : UILabel = {
         let lbl = UILabel()
-        lbl.text = "Alışverişi Tamamla"
+        lbl.text = "Bekleyen Siparişler"
         lbl.font = UIFont(name: Utilities.font, size: 15)
         lbl.textColor = .white
         return lbl
@@ -59,7 +59,6 @@ class CartVC: UIViewController {
         totalPrice.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         configureCollectionView()
         getCartList()
-        
     }
     func configureCollectionView()  {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -81,7 +80,6 @@ class CartVC: UIViewController {
     @objc func dissmis(){
         self.dismiss(animated: true, completion: nil)
     }
-    
     private func getCartList(){
         let db = Firestore.firestore().collection("user")
             .document(currentUser.uid!).collection("cart")
@@ -101,10 +99,18 @@ class CartVC: UIViewController {
             }
         }
     }
-    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
 }
-extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension Orders : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return list.count
     }
@@ -142,10 +148,12 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
         case UICollectionView.elementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerID , for: indexPath) as! CartFooter
             footerView.delegate = self
-      
+            
             if list.isEmpty{
-                footerView.btn.setTitle("Sepetiniz Boş", for: .normal)
+                footerView.btn.setTitle("Bekleyen Siparişiniz Yok", for: .normal)
                 footerView.btn.setBackgroundColor(color: .mainColorTransparent(), forState: .normal)
+            }else{
+                footerView.btn.setTitle("Siparisleri İptal Et", for: .normal)
             }
             return footerView
         default:
@@ -163,7 +171,7 @@ extension CartVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
     }
     
 }
-extension CartVC : CartFooterDelegate{
+extension Orders : CartFooterDelegate{
     func odemeYap(for footer: CartFooter) {
         let vc = PayamentVC()
         vc.total = self.total
@@ -175,7 +183,7 @@ extension CartVC : CartFooterDelegate{
     
     
 }
-extension CartVC : CartCellDelegate {
+extension Orders : CartCellDelegate {
     func removeItem(for cell: CartCell) {
         SVProgressHUD.setBackgroundColor(.mainColor())
         SVProgressHUD.setFont(UIFont(name: Utilities.font, size: 12)!)
@@ -204,7 +212,7 @@ extension CartVC : CartCellDelegate {
                 }
             }
         }
-  
-       
+        
+        
     }
 }
