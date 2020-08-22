@@ -192,15 +192,16 @@ extension Orders : CartFooterDelegate{
                           print("err \(err.debugDescription)!")
                       }else{
                           let ref_delete = Firestore.firestore().collection("user")
-                              .document(self.currentUser!.uid!).collection("cart").document(name)
+                              .document(self.currentUser!.uid!).collection("orders").document(name)
                           ref_delete.delete { (err) in
                               if err == nil {
                                 let idToDelete = type as String
                                 if let index = self.list.firstIndex(where: {$0.type == idToDelete}) {
                                     self.list.remove(at: index)
                                     self.collectionview.reloadData()
+                                    SVProgressHUD.showSuccess(withStatus: "İptal Edildi")
+
                                 }
-                                  SVProgressHUD.showSuccess(withStatus: "İptal Edildi")
                                 
                                   
                               }
@@ -209,6 +210,8 @@ extension Orders : CartFooterDelegate{
                   }
             
         }
+        footer.btn.setTitle("Bekleyen Siparişiniz Yok", for: .disabled)
+    
     }
     
     
