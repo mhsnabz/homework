@@ -175,12 +175,40 @@ extension Orders : UICollectionViewDataSource, UICollectionViewDelegateFlowLayou
 }
 extension Orders : CartFooterDelegate{
     func odemeYap(for footer: CartFooter) {
-        let vc = PayamentVC()
-        vc.total = self.total
-        vc.list = list
-        vc.currentUser = currentUser
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        for item in list {
+              SVProgressHUD.setBackgroundColor(.mainColor())
+                SVProgressHUD.setFont(UIFont(name: Utilities.font, size: 12)!)
+                SVProgressHUD.setForegroundColor(.white)
+                SVProgressHUD.show(withStatus: "İptal Ediliyor")
+            guard let gender = item.gender else { return }
+              guard let type = item.type else { return }
+              guard let name = item.name else { return }
+              guard let size = item.number else { return }
+              
+                 let ref = Firestore.firestore().collection(gender)
+                     .document(type).collection(type).document(name)
+            ref.updateData(["number" : FieldValue.arrayUnion([Double(size)])]) { (err) in
+                      if err != nil {
+                          print("err \(err.debugDescription)!")
+                      }else{
+                          let ref_delete = Firestore.firestore().collection("user")
+                              .document(self.currentUser!.uid!).collection("cart").document(name)
+                          ref_delete.delete { (err) in
+                              if err == nil {
+                                let idToDelete = type as String
+                                if let index = self.list.firstIndex(where: {$0.type == idToDelete}) {
+                                    self.list.remove(at: index)
+                                    self.collectionview.reloadData()
+                                }
+                                  SVProgressHUD.showSuccess(withStatus: "İptal Edildi")
+                                
+                                  
+                              }
+                          }
+                      }
+                  }
+            
+        }
     }
     
     
@@ -207,6 +235,7 @@ extension Orders : CartCellDelegate {
                     .document(self.currentUser!.uid!).collection("cart").document(name)
                 ref_delete.delete { (err) in
                     if err == nil {
+                        
                         SVProgressHUD.showSuccess(withStatus: "Silindi")
                         self.dissmis()
                         
