@@ -200,7 +200,7 @@ extension Orders : CartFooterDelegate{
                                     self.list.remove(at: index)
                                     self.collectionview.reloadData()
                                     SVProgressHUD.showSuccess(withStatus: "İptal Edildi")
-
+                                    self.dissmis()
                                 }
                                 
                                   
@@ -210,7 +210,6 @@ extension Orders : CartFooterDelegate{
                   }
             
         }
-        footer.btn.setTitle("Bekleyen Siparişiniz Yok", for: .disabled)
     
     }
     
