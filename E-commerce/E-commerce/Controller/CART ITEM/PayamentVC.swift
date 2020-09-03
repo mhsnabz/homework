@@ -116,12 +116,14 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
             paymentTextField.becomeFirstResponder()
         } else if textField == paymentTextField  {
             textField.resignFirstResponder()
+            
         }
         return true
     }
     
+    
+    
     func createTextField() {
-        
         cardHolderNameTextField = TextField(frame: CGRect(x: 15, y: 199, width: self.view.frame.size.width - 30, height: 44))
         cardHolderNameTextField.placeholder = "Kredi Kartı Üzerindeki Ad"
         cardHolderNameTextField.delegate = self
@@ -133,7 +135,6 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
         paymentTextField.delegate = self
         paymentTextField.translatesAutoresizingMaskIntoConstraints = false
         paymentTextField.borderWidth = 0
-        
         let border = CALayer()
         let width = CGFloat(1.0)
         border.borderColor = UIColor.darkGray.cgColor
@@ -141,23 +142,19 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
         border.borderWidth = width
         paymentTextField.layer.addSublayer(border)
         paymentTextField.layer.masksToBounds = true
-        
         view.addSubview(paymentTextField)
-        
         NSLayoutConstraint.activate([
             cardHolderNameTextField.topAnchor.constraint(equalTo: creditCardView.bottomAnchor, constant: 20),
             cardHolderNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cardHolderNameTextField.widthAnchor.constraint(equalToConstant: self.view.frame.size.width-25),
             cardHolderNameTextField.heightAnchor.constraint(equalToConstant: 44)
         ])
-        
         NSLayoutConstraint.activate([
             paymentTextField.topAnchor.constraint(equalTo: cardHolderNameTextField.bottomAnchor, constant: 20),
             paymentTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             paymentTextField.widthAnchor.constraint(equalToConstant: self.view.frame.size.width-20),
             paymentTextField.heightAnchor.constraint(equalToConstant: 44)
         ])
-        
         view.addSubview(odemeYap)
         odemeYap.anchor(top: nil, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, rigth: view.rightAnchor, marginTop: 20, marginLeft: 50, marginBottom: 20, marginRigth:50, width: 0, heigth: 40)
         odemeYap.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -171,43 +168,53 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
     }
     @objc func odemeYapFunc()
     {
-        
         SVProgressHUD.setBackgroundColor(.mainColor())
         SVProgressHUD.setFont(UIFont(name: Utilities.font, size: 12)!)
         SVProgressHUD.setForegroundColor(.white)
         SVProgressHUD.show(withStatus: "Ödeme Yapılıyor")
-        guard let user = currentUser else { return }
-        
+        guard let user = currentUser else {return}
         let db = Firestore.firestore().collection("user").document(user.uid!).collection("cart")
         db.getDocuments { (querySnap, err) in
             if err == nil {
                 for doc in querySnap!.documents{
                     db.document(doc.documentID).delete { (err) in
                         if err == nil {
-                            
                             let dbb = Firestore.firestore().collection("user").document(user.uid!).collection("orders").document(doc.documentID)
                             dbb.setData(doc.data(), merge: true) { (err) in
                                 if err == nil {
-                                    SVProgressHUD.dismiss()
-                                    SVProgressHUD.showSuccess(withStatus: "Ödeme Başarılı")
-                                    SVProgressHUD.dismiss(withDelay: 1000)
-                                    
+                                    self.setNotification(currentUser: self.currentUser) { (val) in
+                                        if val {
+                                            SVProgressHUD.dismiss()
+                                            SVProgressHUD.showSuccess(withStatus : "Ödeme Başarılı")
+                                            SVProgressHUD.dismiss(withDelay: 1000)
+                                        } else {
+                                            SVProgressHUD.dismiss()
+                                            SVProgressHUD.showError(withStatus : "Ödeme Yapılamadı")
+                                            SVProgressHUD.dismiss(withDelay: 1000)
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
-                    
                 }
             }
             self.dissmis()
         }
-        
-        
     }
-    @objc func dissmis() {
-        self.dismiss(animated: true, completion: nil)
+    private func setNotification(currentUser : CurrentUser? , completion : @escaping(Bool) -> Void){
+        guard let currentUser = currentUser else { return }
+        let document = ["senderName":currentUser.name as Any,"senderId":currentUser.uid as Any] as [String:Any]
+        let db = Firestore.firestore().collection("notificaiton")
+        db.addDocument(data: document) { (err) in
+            if err == nil {
+                completion(true)
+            }else{
+                completion(false)
+            }
+        }
     }
-    
+    @objc func dissmis() { self.dismiss(animated: true, completion: nil) }
     func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
         creditCardView.paymentCardTextFieldDidChange(cardNumber: textField.cardNumber, expirationYear: textField.expirationYear, expirationMonth: textField.expirationMonth, cvc: textField.cvc)
         if textField.isValid {
@@ -215,12 +222,12 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
             odemeYap.setTitleColor(.white, for: .normal)
             odemeYap.setBackgroundColor(color: .red, forState: .normal)
             odemeYap.setTitle("Ödeme Yap", for: .normal)
-             odemeYap.titleLabel?.font = UIFont(name: Utilities.font, size: 14)
-              odemeYap.layer.cornerRadius = 8
+            odemeYap.titleLabel?.font = UIFont(name: Utilities.font, size: 14)
+            odemeYap.layer.cornerRadius = 8
             
         }else{
             odemeYap.isHidden = true
-         odemeYap.setTitle("Ödeme Yap", for: .disabled)
+            odemeYap.setTitle("Ödeme Yap", for: .disabled)
             odemeYap.setBackgroundColor(color: .mainColorTransparent(), forState: .disabled)
             odemeYap.titleLabel?.font = UIFont(name: Utilities.font, size: 14)
             odemeYap.setTitleColor(.white, for: .disabled)

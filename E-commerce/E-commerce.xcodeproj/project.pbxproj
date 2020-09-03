@@ -80,6 +80,7 @@
 		39D341F2BF2F9471F4F3C68E /* Pods_E_commerce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_commerce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C36CDB583A17952B04A260D /* Pods_E_commerce_E_commerceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_commerce_E_commerceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5691939F2B28618B9EA85465 /* Pods_E_commerceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_commerceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6618F6AB25011708005E5873 /* E-commerce.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "E-commerce.entitlements"; sourceTree = "<group>"; };
 		661997A824C32BE600298432 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		661997AE24C3344C00298432 /* wait.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wait.json; sourceTree = "<group>"; };
 		661997B124C338BA00298432 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
@@ -249,6 +250,7 @@
 		66EEAC1B24C218ED00883EC6 /* E-commerce */ = {
 			isa = PBXGroup;
 			children = (
+				6618F6AB25011708005E5873 /* E-commerce.entitlements */,
 				661997B024C3389B00298432 /* Model */,
 				66EEAC6E24C2C6D100883EC6 /* view */,
 				66EEAC5D24C22D2700883EC6 /* anim */,
@@ -790,7 +792,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -844,7 +846,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -859,6 +861,7 @@
 			baseConfigurationReference = A5FC79F53F88AAE1012B6877 /* Pods-E-commerce.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "E-commerce/E-commerce.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F68Q68LA39;
 				INFOPLIST_FILE = "E-commerce/Info.plist";
@@ -869,7 +872,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.homework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -878,6 +881,7 @@
 			baseConfigurationReference = 8471B01016185522757CD9CF /* Pods-E-commerce.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "E-commerce/E-commerce.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F68Q68LA39;
 				INFOPLIST_FILE = "E-commerce/Info.plist";
@@ -888,7 +892,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.homework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
