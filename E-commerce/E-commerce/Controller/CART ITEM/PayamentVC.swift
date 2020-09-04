@@ -13,7 +13,7 @@ import SVProgressHUD
 import FirebaseAuth
 import FirebaseFirestore
 class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextFieldDelegate  {
-    
+    private  let adminID = "lWJwn9XlDDfxFoAExgFDhyXrl7n1"
     let paymentTextField = STPPaymentCardTextField()
     private var cardHolderNameTextField: TextField!
     private var cardParams: STPPaymentMethodCardParams!
@@ -202,17 +202,34 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
             self.dissmis()
         }
     }
+    var tokenId : String?
     private func setNotification(currentUser : CurrentUser? , completion : @escaping(Bool) -> Void){
         guard let currentUser = currentUser else { return }
-        let document = ["senderName":currentUser.name as Any,"senderId":currentUser.uid as Any] as [String:Any]
-        let db = Firestore.firestore().collection("notificaiton")
-        db.addDocument(data: document) { (err) in
-            if err == nil {
-                completion(true)
-            }else{
-                completion(false)
-            }
+        getTokenId { (val) in
+            
+            let document = ["msg":"Yeni Bir Sipariş Var","type":"Onay Bekleyen Şipariş","senderName":currentUser.name as Any,"from":currentUser.uid as Any,"getterTokenID":val] as [String:Any]
+            let db = Firestore.firestore().collection("notificaiton").document(self.adminID).collection("notificaiton")
+                  db.addDocument(data: document) { (err) in
+                      if err == nil {
+                          completion(true)
+                      }else{
+                          completion(false)
+                      }
+                  }
         }
+      
+    }
+    private func getTokenId(completion : @escaping(String) ->Void){
+        let dba = Firestore.firestore().collection("user")
+                  .document(adminID)
+              dba.getDocument { (docSnap, err) in
+                  if err == nil {
+                    if docSnap!.exists {
+                        let tokenId = docSnap?.get("tokenID") as! String
+                        completion(tokenId)
+                    }
+                  }
+              }
     }
     @objc func dissmis() { self.dismiss(animated: true, completion: nil) }
     func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
