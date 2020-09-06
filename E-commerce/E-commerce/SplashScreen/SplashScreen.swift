@@ -26,33 +26,23 @@ class SplashScreen: UIViewController {
                 let db = Firestore.firestore().collection("user")
                     .document(Auth.auth().currentUser!.uid)
                 db.getDocument { (docSnap, err) in
-                    if err == nil
-                    {
+                    if err == nil {
                         let user = CurrentUser.init(dic: docSnap!.data()!)
                         let vc = ContainerController()
                         vc.currentUser = user
                         vc.modalPresentationStyle = .fullScreen
                         self.present(vc, animated: true, completion: nil)
-                        
                     }else{
                         let vc = Login()
                         vc.modalPresentationStyle = .fullScreen
                         self.present(vc, animated: true, completion: nil)
-                        return
-                    }
-                }
+                        return }}
                 
             }else{
                 let vc = Login()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)
-            }
-            
-            
-        }
-        
-        
-    }
+            } } }
     
     
     

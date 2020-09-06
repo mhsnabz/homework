@@ -135,8 +135,6 @@ class ProductVC: UIViewController {
                         let model = ProductList.init(id : doc.documentID , dic: doc.data())
                         self.list.append(model)
                         self.collectionview.reloadData()
-                       
-                     
                     }
                 }
                
