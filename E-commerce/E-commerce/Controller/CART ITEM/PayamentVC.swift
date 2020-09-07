@@ -184,9 +184,16 @@ class PayamentVC: UIViewController ,STPPaymentCardTextFieldDelegate, UITextField
                                 if err == nil {
                                     self.setNotification(currentUser: self.currentUser) { (val) in
                                         if val {
-                                            SVProgressHUD.dismiss()
-                                            SVProgressHUD.showSuccess(withStatus : "Ödeme Başarılı")
-                                            SVProgressHUD.dismiss(withDelay: 1000)
+                                             let dbb = Firestore.firestore().collection("user").document(user.uid!).collection("orders").document(doc.documentID)
+                                            dbb.setData(["uid":Auth.auth().currentUser!.uid], merge: true) { (err) in
+                                                if err == nil {
+                                                    SVProgressHUD.dismiss()
+                                                    SVProgressHUD.showSuccess(withStatus : "Ödeme Başarılı")
+                                                    SVProgressHUD.dismiss(withDelay: 1000)
+                                                }
+                                            }
+                               
+                                         
                                         } else {
                                             SVProgressHUD.dismiss()
                                             SVProgressHUD.showError(withStatus : "Ödeme Yapılamadı")
